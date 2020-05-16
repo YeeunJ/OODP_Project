@@ -48,6 +48,7 @@ public class connection {
 			//rs:ResultSet은 실행한 쿼리문의 결과 값을 받아들이다.
 			rs = st.executeQuery(sql);
 			System.out.println(rs);
+			
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String mail = rs.getString("mail");
