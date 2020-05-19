@@ -2,14 +2,15 @@ package com.oodp.projectSupporter.dbconnection;
 import java.sql.*;
 
 public class connection {
-    Connection con;
-    Statement st;
-    PreparedStatement ps;
-    ResultSet rs;
+    private Connection con;
+    private Statement st;
+    private PreparedStatement ps;
+    private ResultSet rs;
  
     /**
      * 로드 연결을 위한 생성자
      * */
+    
     public connection() {
         try {
             // 로드
@@ -25,6 +26,10 @@ public class connection {
             System.out.println(e + "=> 연결 fail");
         }
     }//생성자
+    
+    public Connection getConnection() {
+    	return con;
+    }
     
     public void dbClose() {
 		try {

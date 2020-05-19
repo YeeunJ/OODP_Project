@@ -1,6 +1,7 @@
 package com.oodp.projectSupporter;
 
 import com.oodp.projectSupporter.dbconnection.connection;
+import com.oodp.projectSupporter.taskpage.taskPage;
 
 public class main {
 
@@ -10,10 +11,12 @@ public class main {
 		 * 그리고 이 안에서 각자 추가로 패키지 정해서 코드 구현하시면 되실 것 같아요!!
 		 * 그리고 교수님께서 이번에는 일부로라도 못짜고 refactoring해도 된다고 하셨으니까!! 
 		 * 대충 기능 구현해서 돌아가게만 해놓고 다음에 refactoring 하면 좋을 것 같아요~
+		 * connection c = new connection();
+		 * c.readData();
 		 */
 		
-		connection c = new connection();
-		c.readData();
+		taskPage tp = new taskPage();
+		tp.generatePage();
 	}
 
 }
