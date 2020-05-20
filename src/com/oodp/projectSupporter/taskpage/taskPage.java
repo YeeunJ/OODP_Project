@@ -28,14 +28,14 @@ public class taskPage extends JFrame {
 		field = new JTextField(10);
 		field2 = new JTextField(30);
 		field3 = new JTextField(10);
-		label = new JLabel("모든 task 내용 출력");
-		label2 = new JLabel("제목");
-		label3 = new JLabel("내용");
-		label4 = new JLabel("마감 기한");
+		label = new JLabel("紐⑤뱺 task �궡�슜 異쒕젰");
+		label2 = new JLabel("�젣紐�");
+		label3 = new JLabel("�궡�슜");
+		label4 = new JLabel("留덇컧 湲고븳");
 		panel = new JPanel();
 		panel2 = new JPanel();
-		button = new JButton("입력");
-		button2 = new JButton("출력");
+		button = new JButton("�엯�젰");
+		button2 = new JButton("異쒕젰");
 
 		field.setText("");
 		field2.setText("");
@@ -43,8 +43,6 @@ public class taskPage extends JFrame {
 
 		button.addActionListener(al);
 		button2.addActionListener(al);
-
-
 
 		panel.add(label2);
 		panel.add(field);
