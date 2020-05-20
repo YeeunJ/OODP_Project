@@ -3,9 +3,6 @@ import java.sql.*;
 
 public class connection {
     private Connection con;
-    private Statement st;
-    private PreparedStatement ps;
-    private ResultSet rs;
  
     /**
      * 로드 연결을 위한 생성자
@@ -30,17 +27,5 @@ public class connection {
     public Connection getConnection() {
     	return con;
     }
-    
-    public void dbClose() {
-		try {
-			if (rs != null)
-				rs.close();
-			if (st != null)
-				st.close();
-			if (ps != null)
-				ps.close();
-		} catch (Exception e) {
-			System.out.println(e + "=> dbClose fail");
-		}
-	}
+ 
 }
