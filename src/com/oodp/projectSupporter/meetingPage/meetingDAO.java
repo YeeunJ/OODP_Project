@@ -50,7 +50,7 @@ public class meetingDAO {
 		  }
 	
 	  
-	  public ArrayList<taskDTO> selectAllTask() throws ClassNotFoundException, SQLException {
+	  public ArrayList<meetingDTO> selectAllTask() throws ClassNotFoundException, SQLException {
 		    conn = mysqlDB.getConnection();
 		    query = new StringBuffer();
 		    query.append("SELECT * FROM meeting");

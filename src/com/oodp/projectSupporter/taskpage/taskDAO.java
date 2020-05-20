@@ -13,7 +13,7 @@ public class taskDAO {
 	  PreparedStatement pstmt;
 	  ResultSet rs;
 	  StringBuffer query;
-	   
+	  
 	  taskDTO task;
 	  ArrayList<taskDTO> tasks;
 	 
@@ -48,7 +48,6 @@ public class taskDAO {
 	  }
 	   
 	  public ArrayList<taskDTO> selectAllTask() throws ClassNotFoundException, SQLException {
-	    conn = mysqlDB.getConnection();
 	    query = new StringBuffer();
 	    query.append("SELECT * FROM task");
 	    pstmt = conn.prepareStatement(query.toString());

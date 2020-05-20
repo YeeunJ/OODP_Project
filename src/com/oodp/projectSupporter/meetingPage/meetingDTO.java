@@ -29,7 +29,7 @@ public class meetingDTO {
 	
 	@Override
 	public String toString() {
-		return "meetingDTO [when=" + when + ", title=" + title + ", content=" + content + "+ "]";
+		return "meetingDTO [when=" + when + ", title=" + title + ", content=" + content + "]";
 	}
 	
 }
