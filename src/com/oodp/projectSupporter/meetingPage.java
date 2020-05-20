@@ -1,3 +1,5 @@
+package com.oodp.projectSupporter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.BorderLayout;
@@ -178,13 +180,6 @@ public class meetingPage extends JFrame {
                 this.setVisible(true);
                
         }
-}
+	}
 	
-		
-
 	
-	 public static void main(String[] args) {
-         new meetingPage();
-    }  
-	
-	 }
