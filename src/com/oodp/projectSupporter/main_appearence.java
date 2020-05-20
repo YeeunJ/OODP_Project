@@ -15,6 +15,8 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -27,6 +29,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+
+import com.oodp.projectSupporter.dbconnection.connection;
+import com.oodp.projectSupporter.taskpage.taskDAO;
+import com.oodp.projectSupporter.taskpage.taskDTO;
 
 //import com.oodp.projectSupporter.meetingPage.inputFrame;
 
@@ -89,8 +95,11 @@ public class main_appearence {
 
 	/**
 	 * Launch the application.
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args){
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -264,7 +273,7 @@ public class main_appearence {
 		lblNewLabel_10.setBounds(456, 70, 272, 107);
 		taskPage.add(lblNewLabel_10);
 		
-		JLabel lblNewLabel_11 = new JLabel("Your Tasks :");
+		JLabel lblNewLabel_11 = new JLabel("ALL Tasks :");
 		lblNewLabel_11.setFont(new Font("굴림", Font.BOLD, 20));
 		lblNewLabel_11.setBounds(227, 236, 163, 47);
 		taskPage.add(lblNewLabel_11);
@@ -631,8 +640,45 @@ public class main_appearence {
 			}
 		});
 		taskPageButton.addActionListener(new ActionListener() {
+			ArrayList<taskDTO> tasks;
+			taskDAO td;
+			String s = "<html>";
 			public void actionPerformed(ActionEvent e) {
 				mainPage.setVisible(false);
+				taskDAO td = null;
+				taskDAO taskDAO;
+				  connection mysqlDB;
+				  Connection conn;
+				  PreparedStatement pstmt;
+				  ResultSet rs;
+				  StringBuffer query;
+				  
+				  taskDTO task;
+				mysqlDB = new connection();
+				conn = mysqlDB.getConnection();
+				
+			    query = new StringBuffer();
+			    query.append("SELECT * FROM task;");
+			    try {
+					pstmt = conn.prepareStatement(query.toString());
+					rs = pstmt.executeQuery();
+					String s = "";
+					while(rs.next()){
+					      task = new taskDTO();
+					      task.setId(rs.getInt("id"));
+					      task.setProject_id(rs.getInt("project_id"));
+					      task.setMember_id(rs.getInt("member_id"));
+					      task.setDue_date(rs.getDate("due_date"));
+					      task.setTitle(rs.getString("title")); 
+					      task.setContent(rs.getString("content"));
+					      task.setCheck(rs.getInt("checked"));
+					      s += task.toString() + "\n";
+					}
+					textPane_1.setText(s);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				taskPage.setVisible(true);
 			}
 		});

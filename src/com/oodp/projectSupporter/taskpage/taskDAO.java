@@ -7,7 +7,7 @@ import com.oodp.projectSupporter.dbconnection.connection;
 
 public class taskDAO {
 	private static taskDAO taskDAO;
-	  private connection mysqlDB = new connection();
+	  private connection mysqlDB;
 	   
 	  Connection conn;
 	  PreparedStatement pstmt;
@@ -26,7 +26,7 @@ public class taskDAO {
 	    return taskDAO;
 	  }
 	   
-	  public synchronized int insertTask(taskDTO task) throws ClassNotFoundException, SQLException {
+	  public synchronized int insertTask(taskDTO task) throws SQLException {
 	    conn = mysqlDB.getConnection();
 	    query = new StringBuffer();
 	    query.append("INSERT INTO task (project_id, memeber_id, due_date, title, content, check)");
@@ -47,11 +47,14 @@ public class taskDAO {
 	  }
 	   
 	  public ArrayList<taskDTO> selectAllTask() throws ClassNotFoundException, SQLException {
+		mysqlDB = new connection();
+		conn = mysqlDB.getConnection();
+		
 	    query = new StringBuffer();
-	    query.append("SELECT * FROM task");
+	    query.append("SELECT * FROM task;");
 	    pstmt = conn.prepareStatement(query.toString());
 	    rs = pstmt.executeQuery();
-	     
+	    
 	    while(rs.next()) {
 	      task = new taskDTO();
 	      task.setId(rs.getInt("id"));
@@ -60,13 +63,13 @@ public class taskDAO {
 	      task.setDue_date(rs.getDate("due_date"));
 	      task.setTitle(rs.getString("title")); 
 	      task.setContent(rs.getString("content"));
-	      task.setCheck(rs.getInt("check"));
+	      task.setCheck(rs.getInt("checked"));
 	      tasks.add(task);
 	    } 
 	     
 	    disconnect();
 	     
-	    return tasks;
+	   return tasks;
 	  }
 	   
 	  public void disconnect() throws SQLException {

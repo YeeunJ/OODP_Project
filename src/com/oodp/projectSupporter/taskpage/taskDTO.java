@@ -56,7 +56,7 @@ public class taskDTO {
 	
 	@Override
 	public String toString() {
-		return "taskDTO [id=" + id + ", project_id=" + project_id + ", member_id=" + member_id + ", title=" + title
+		return "[id=" + id + ", project_id=" + project_id + ", member_id=" + member_id + ", title=" + title
 				+ ", content=" + content + ", due_date=" + due_date + ", check=" + check + "]";
 	}
 	
