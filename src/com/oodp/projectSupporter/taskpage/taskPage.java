@@ -58,11 +58,13 @@ public class taskPage extends JFrame {
 		this.setVisible(true);
 	}
 	
+	
 	public class taskPageAction implements ActionListener {
 		ArrayList<taskDTO> tasks;
 		taskDAO td;
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			/*
 			if (e.getSource() == button) {
 				taskDTO task = new taskDTO();
 				title = String.valueOf(field.getText());
@@ -90,7 +92,7 @@ public class taskPage extends JFrame {
 				}
 				for (taskDTO t : tasks)
 					panel2.add(new Label(t.toString()));
-			}
+			}*/
 			
 		}
 	}

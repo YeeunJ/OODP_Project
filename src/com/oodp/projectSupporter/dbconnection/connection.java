@@ -43,26 +43,4 @@ public class connection {
 			System.out.println(e + "=> dbClose fail");
 		}
 	}
-    
-    public void readData() {
-		try {
-			// 쿼리문을 db에 넘김, 온전한 문자열 대입
-			st = con.createStatement();
-
-			String sql = "select * from user;";
-			//rs:ResultSet은 실행한 쿼리문의 결과 값을 받아들이다.
-			rs = st.executeQuery(sql);
-			System.out.println(rs);
-			while(rs.next()) {
-				int id = rs.getInt("id");
-				String mail = rs.getString("mail");
-				String password = rs.getString("password");
-				System.out.println(id + ", " + mail + ", " + password);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			dbClose();
-		}
-	}
 }
