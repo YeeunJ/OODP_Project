@@ -87,7 +87,7 @@ public class main_appearence {
 		frame.setTitle("Program");
 		
 		
-		/////
+		/////////
 		
 		JPanel myPageAddEditPage = new JPanel();
 		myPageAddEditPage.setVisible(false);
