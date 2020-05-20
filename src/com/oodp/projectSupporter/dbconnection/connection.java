@@ -28,7 +28,6 @@ public class connection {
     }//생성자
     
     public Connection getConnection() {
-    	System.out.println(con);
     	return con;
     }
     
