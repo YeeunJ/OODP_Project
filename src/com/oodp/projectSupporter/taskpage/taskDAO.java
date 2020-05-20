@@ -26,14 +26,14 @@ public class taskDAO {
 	    return taskDAO;
 	  }
 	   
-	  // synchronized, 한 명의 글쓰기를 처리한 후 다른 사람의 글쓰기를 처리해야 한다.
+	  // synchronized, �븳 紐낆쓽 湲��벐湲곕�� 泥섎━�븳 �썑 �떎瑜� �궗�엺�쓽 湲��벐湲곕�� 泥섎━�빐�빞 �븳�떎.
 	  public synchronized int insertTask(taskDTO task) throws ClassNotFoundException, SQLException {
 	    conn = mysqlDB.getConnection();
 	    query = new StringBuffer();
 	    query.append("INSERT INTO task (project_id, memeber_id, due_date, title, content, check)");
 	    query.append("VALUES(?, ?, ?, ?, ?, 0);");
 	    pstmt = conn.prepareStatement(query.toString());
-	    // parameterIndex는 쿼리문의 ? 순서대로 적어주며, 1부터 시작한다.
+	    // parameterIndex�뒗 荑쇰━臾몄쓽 ? �닚�꽌��濡� �쟻�뼱二쇰ŉ, 1遺��꽣 �떆�옉�븳�떎.
 	    pstmt.setLong(1, task.getProject_id());
 	    pstmt.setLong(2, task.getMember_id());
 	    pstmt.setString(3, task.getDue_date().toString());
@@ -64,7 +64,7 @@ public class taskDAO {
 	      task.setContent(rs.getString("content"));
 	      task.setCheck(rs.getInt("check"));
 	      tasks.add(task);
-	    }
+	    } 
 	     
 	    disconnect();
 	     
