@@ -1,14 +1,20 @@
 package com.oodp.projectSupporter.dbconnection;
 import java.sql.*;
 
-public class connection {
+public class connection implements connection_info{
+	private static connection cc = null;
     private Connection con;
  
     /**
      * 로드 연결을 위한 생성자
      * */
-    
-    public connection() {
+    public synchronized static connection getInstance() {
+    	if(cc == null) {
+    		cc = new connection();
+    	}
+    	return cc;
+    }
+    private connection() {
         try {
             // 로드
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -27,5 +33,12 @@ public class connection {
     public Connection getConnection() {
     	return con;
     }
- 
+
+   public void close(PreparedStatement pstmt, ResultSet rs) throws SQLException {
+	   if(rs != null) {
+		   rs.close();
+		   }
+	   pstmt.close();
+	   con.close();
+   }
 }
