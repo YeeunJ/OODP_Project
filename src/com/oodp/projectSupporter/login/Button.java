@@ -8,5 +8,5 @@ public class Button {
 	public Button(Command theCommand) { setCommand(theCommand); }
 	public void setCommand(Command newCommand) { this.theCommand = newCommand; }
 	// 버튼이 눌리면 주어진 Command의 execute 메서드를 호출한다.
-	public void pressed() throws ClassNotFoundException, SQLException { theCommand.execute();}
+	public Boolean pressed() throws ClassNotFoundException, SQLException { return theCommand.execute();}
 }

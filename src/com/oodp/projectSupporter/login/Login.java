@@ -7,15 +7,13 @@ import com.oodp.projectSupporter.dto.DTO;
 import com.oodp.projectSupporter.dto.userDTO;
 
 public class Login {
-	public void loginexe() throws ClassNotFoundException, SQLException{
-		DTO is;
-		is = new userDTO();
-		logindao login = new logindao("login", is);
+	public Boolean loginexe(userDTO ud) throws ClassNotFoundException, SQLException{
+		logindao login = new logindao("login", ud);
 		login.prepareDB();
 		if(login.getResult()) {
-			System.out.println("login success!!");
+			return true;
 		}else {
-			System.out.println("login fail!!");
+			return false;
 		}
 	}
 }
