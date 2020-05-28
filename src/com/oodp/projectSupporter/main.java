@@ -7,7 +7,7 @@ import com.oodp.projectSupporter.dao.PrintAlldao;
 import com.oodp.projectSupporter.dto.DTO;
 
 public class main {
-
+/*
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		PrintAlldao pa1 = new PrintAlldao("meetingPage");
@@ -26,5 +26,5 @@ public class main {
 			System.out.println(d.toString());
 		}
 	}
-
+*/
 }

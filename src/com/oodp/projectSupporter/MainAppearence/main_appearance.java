@@ -15,6 +15,8 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -27,6 +29,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+
+import com.oodp.projectSupporter.dao.PrintAlldao;
+import com.oodp.projectSupporter.dto.DTO;
+import com.oodp.projectSupporter.dto.userDTO;
+import com.oodp.projectSupporter.login.Button;
+import com.oodp.projectSupporter.login.Command;
+import com.oodp.projectSupporter.login.Login;
+import com.oodp.projectSupporter.login.LoginCommand;
 
 //import com.oodp.projectSupporter.meetingPage.inputFrame;
 
@@ -118,7 +128,7 @@ public class main_appearance {
 
 		// ###########################<Login Page>###############################
 		ImagePanel Login_Page = new ImagePanel(
-				new ImageIcon("C:/Users/bsi05/git/OODP_Project/Image/Login2.jpg").getImage());
+				new ImageIcon("/Users/jeong-yeeun/git/OODP_Project/Image/Login2.jpg").getImage());
 		Login_Page.setBounds(0, 0, 1000, 640);
 		frame.getContentPane().add(Login_Page);
 		frame.setSize(Login_Page.getWidth(), Login_Page.getHeight());
@@ -229,13 +239,13 @@ public class main_appearance {
 
 		JLabel lblNewLabel_11 = new JLabel("All Tasks :");
 		lblNewLabel_11.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_11.setBounds(227, 236, 163, 47);
+		lblNewLabel_11.setBounds(127, 236, 163, 47);
 		taskPage.add(lblNewLabel_11);
-
+		/*
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setBackground(Color.LIGHT_GRAY);
 		textPane_1.setBounds(381, 221, 405, 237);
-		taskPage.add(textPane_1);
+		taskPage.add(textPane_1);*/
 		// ####################################################################
 
 		// ###########################<MyPage>#################################
@@ -480,6 +490,23 @@ public class main_appearance {
 		LoginEnterBttn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/*
+				userDTO user = new userDTO();
+				user.setMail(IDtext.getText());
+				Command LoginCommand = new LoginCommand(new Login(), user);
+				Button loginbutton = new Button(LoginCommand);
+				try {
+					if(loginbutton.pressed()) {
+						Login_Page.setVisible(false);
+						mainPage.setVisible(true);
+					}else {
+						JOptionPane.showMessageDialog(null, "You failed to log in");
+					}
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}*/
+				
 				// TODO Auto-generated method stub
 				if (IDtext.getText().equals("Siin")
 						&& (Arrays.equals(passwordField.getPassword(), "1234".toCharArray()))) {
@@ -546,7 +573,7 @@ public class main_appearance {
 		JButton taskPageBackButton;
 		taskPageBackButton = new JButton("Back");
 		taskPageBackButton.setFont(new Font("굴림", Font.BOLD, 16));
-		taskPageBackButton.setBounds(157, 435, 108, 37);
+		taskPageBackButton.setBounds(110, 435, 108, 37);
 		taskPage.add(taskPageBackButton);
 		taskPageBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -573,6 +600,23 @@ public class main_appearance {
 		taskPageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainPage.setVisible(false);
+				PrintAlldao pa = new PrintAlldao("taskPage");
+				try {
+					pa.prepareDB();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ArrayList<DTO> data2 = pa.getdata();
+				int height = 150;
+				for(DTO d: data2) {
+					JButton task = new JButton(d.toString());
+					task.setBounds(250, height, 700, 36);
+					height+=40;
+					if(height < 550)
+						taskPage.add(task);
+					System.out.println(d.toString());
+				}
 				taskPage.setVisible(true);
 			}
 		});

@@ -56,8 +56,8 @@ public class taskDTO implements DTO{
 	
 	@Override
 	public String toString() {
-		return "[id=" + id + ", project_id=" + project_id + ", member_id=" + member_id + ", title=" + title
-				+ ", content=" + content + ", due_date=" + due_date + ", check=" + check + "]";
+		return "project_id: " + project_id + ", member_id: " + member_id + ", title: " + title
+				+ ", due_date: " + due_date + ", check: " + check;
 	}
 	
 	
