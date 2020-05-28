@@ -463,8 +463,6 @@ public class main_appearence {
 		LoginEnterBttn.setBounds(375, 513, 279, 40);
 		
 		LoginEnterBttn.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(IDtext.getText().equals("Siin") && (Arrays.equals(passwordField.getPassword(), "1234".toCharArray())) )  {
