@@ -1,8 +1,8 @@
-package com.oodp.projectSupporter.taskpage;
+package com.oodp.projectSupporter.dto;
 
 import java.sql.Date;
 
-public class taskDTO {
+public class taskDTO implements DTO{
 	private int id;
 	private int project_id;
 	private int member_id;
