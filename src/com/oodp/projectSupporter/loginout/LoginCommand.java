@@ -1,9 +1,10 @@
 package com.oodp.projectSupporter.loginout;
 
-public class LoginCommand implements Command{
+public class LoginCommand extends DB implements Command{
 
 	private String mail;
 	private String password;
+	private DB db;
 	
 	public LoginCommand(String mail, String password) {
 		this.mail=mail;
@@ -15,6 +16,7 @@ public class LoginCommand implements Command{
 	//Override
 	public void execute() {
 		
+		db.login(mail, password);
 		
 	}
 	
