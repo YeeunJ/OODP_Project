@@ -5,10 +5,11 @@ import java.sql.SQLException;
 import com.oodp.projectSupporter.dto.DTO;
 import com.oodp.projectSupporter.dto.meetingDTO;
 import com.oodp.projectSupporter.dto.taskDTO;
+import com.oodp.projectSupporter.dto.userDTO;
 
 public class Insertdao extends daoTemplate{
 	DTO is;
-	int result;
+	int r;
 	public Insertdao(String check, DTO is) {
 		super(check);
 		this.is = is;
@@ -19,7 +20,9 @@ public class Insertdao extends daoTemplate{
 		if(check.compareTo("taskPage") == 0) {
 			sql = "INSERT INTO task (project_id, memeber_id, due_date, title, content, check) VALUES(?, ?, ?, ?, ?, 0);";
 		}else if(check.compareTo("meetingPage") == 0) {
-			sql = "INSERT INTO task (date, content, location, project_id, file) VALUES (?,?,?,?,?);";
+			sql = "INSERT INTO meeting (date, content, location, project_id, file) VALUES (?,?,?,?,?);";
+		}else if(check.compareTo("register") == 0) {
+			sql = "INSERT INTO user (mail, password, name) VALUES (?,?,?);";
 		}
 	}
 	public void hookmethod2() throws SQLException {
@@ -37,7 +40,12 @@ public class Insertdao extends daoTemplate{
 			pstmt.setString(3, meeting.getLocation());
 			pstmt.setLong(4, meeting.getProject_id());
 		    pstmt.setString(5, meeting.getFile());
+		}else if(check.compareTo("register") == 0) {
+			userDTO user = (userDTO)is;
+			pstmt.setString(1, user.getMail());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getName());
 		}
-		result = pstmt.executeUpdate();
+		r = pstmt.executeUpdate();
 	}
 }

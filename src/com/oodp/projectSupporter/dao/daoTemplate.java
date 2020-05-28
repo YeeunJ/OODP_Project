@@ -17,6 +17,7 @@ public abstract class daoTemplate {
 	protected ArrayList<DTO> data = new ArrayList<DTO>();
 	protected String sql;
 	protected String check;
+	protected Boolean result = false;
 	
 	public daoTemplate(String check){
 		this.check = check;
@@ -34,5 +35,9 @@ public abstract class daoTemplate {
 	
 	public ArrayList<DTO> getdata(){
 		return data;
+	}
+	
+	public Boolean getResult() {
+		return result;
 	}
 }
