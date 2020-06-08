@@ -16,7 +16,7 @@ public class PrintAlldao extends daoTemplate{
 		if(check.compareTo("taskPage") == 0) {
 			sql = "SELECT * FROM task;";
 		}else if(check.compareTo("meetingPage") == 0) {
-			sql = "SELECT * FROM meeting;";
+			sql = "SELECT * FROM meeting order by date DESC;";
 		}
 	}
 	public void hookmethod2() throws SQLException {

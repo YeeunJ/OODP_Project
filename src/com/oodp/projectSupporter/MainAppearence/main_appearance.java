@@ -13,12 +13,17 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,11 +32,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.oodp.projectSupporter.dao.Insertdao;
 import com.oodp.projectSupporter.dao.PrintAlldao;
 import com.oodp.projectSupporter.dto.DTO;
+import com.oodp.projectSupporter.dto.meetingDTO;
 import com.oodp.projectSupporter.dto.userDTO;
 import com.oodp.projectSupporter.login.Button;
 import com.oodp.projectSupporter.login.Command;
@@ -42,7 +50,6 @@ import com.oodp.projectSupporter.login.LoginCommand;
 
 public class main_appearance {
 	inputFrame tf2;
-
 	private JFrame frame;
 	private JTextField IDtext;
 	private JPasswordField passwordField;
@@ -54,6 +61,7 @@ public class main_appearance {
 	private JLabel lblYourProject;
 	private JButton meetingPaticipateButton;
 	private JButton addNewMeetingButton;
+	private JButton listMeetingButton;
 	private JButton meetingPageBackButton;
 	private JPanel taskCheckListPage;
 	private JButton taskCheckListPageBackButton;
@@ -64,7 +72,8 @@ public class main_appearance {
 	private JLabel lblTeam;
 	private JTextField textField_20;
 	private JButton logOutButton;
-
+	private ButtonGroup taskGroup;
+	private meetingDTO md = new meetingDTO();
 	/**
 	 * Launch the application.
 	 */
@@ -310,18 +319,27 @@ public class main_appearance {
 		PageMaster meetingPageMaster = new PageMaster(new meetingPageMaker());
 		JPanel meetingPage = meetingPageMaster.createPage();
 		frame.getContentPane().add(meetingPage);
-
+		PrintAlldao pa = new PrintAlldao("meetingPage");
+		try {
+			pa.prepareDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		ArrayList<DTO> data2 = pa.getdata();
+		meetingDTO mdto;
+		mdto = (meetingDTO) data2.get(0);
 		JLabel lblNewLabel_8 = new JLabel("Meeting Page");
 		lblNewLabel_8.setFont(new Font("굴림", Font.BOLD, 30));
 		lblNewLabel_8.setBounds(433, 57, 244, 100);
 		meetingPage.add(lblNewLabel_8);
 
-		JLabel lblNewLabel_9 = new JLabel("Date, Time :");
+		JLabel lblNewLabel_9 = new JLabel("Date :");
 		lblNewLabel_9.setFont(new Font("굴림", Font.BOLD, 18));
 		lblNewLabel_9.setBounds(550, 248, 115, 25);
 		meetingPage.add(lblNewLabel_9);
 
-		JLabel lblTitle = new JLabel("Title :");
+		JLabel lblTitle = new JLabel("Location :");
 		lblTitle.setFont(new Font("굴림", Font.BOLD, 18));
 		lblTitle.setBounds(550, 306, 103, 25);
 		meetingPage.add(lblTitle);
@@ -331,18 +349,15 @@ public class main_appearance {
 		lblContent.setBounds(550, 362, 103, 25);
 		meetingPage.add(lblContent);
 
-		JTextField textField_9 = new JTextField();
+		JLabel textField_9 = new JLabel(mdto.getDate().toString());
 		textField_9.setBounds(700, 245, 175, 21);
 		meetingPage.add(textField_9);
-		textField_9.setColumns(10);
 
-		JTextField textField_10 = new JTextField();
-		textField_10.setColumns(10);
+		JLabel textField_10 = new JLabel(mdto.getLocation());
 		textField_10.setBounds(700, 309, 175, 21);
 		meetingPage.add(textField_10);
 
-		JTextField textField_11 = new JTextField();
-		textField_11.setColumns(10);
+		JLabel textField_11 = new JLabel(mdto.getContent());
 		textField_11.setBounds(700, 365, 175, 21);
 		meetingPage.add(textField_11);
 		// ####################################################################
@@ -524,7 +539,12 @@ public class main_appearance {
 		meetingPaticipateButton.setFont(new Font("굴림", Font.BOLD, 15));
 		meetingPaticipateButton.setBounds(168, 238, 237, 35);
 		meetingPage.add(meetingPaticipateButton);
-
+		
+		listMeetingButton = new JButton("past meeting list");
+		listMeetingButton.setFont(new Font("굴림", Font.BOLD, 15));
+		listMeetingButton.setBounds(168, 295, 237, 35);
+		meetingPage.add(listMeetingButton);
+		
 		addNewMeetingButton = new JButton("Add new meeting");
 		addNewMeetingButton.setFont(new Font("굴림", Font.BOLD, 15));
 		addNewMeetingButton.setBounds(168, 352, 237, 35);
@@ -540,7 +560,7 @@ public class main_appearance {
 				JOptionPane.showMessageDialog(null, "Connect to zoom...");
 			}
 		});
-
+		
 		addNewMeetingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tf2 = new inputFrame();
@@ -608,13 +628,19 @@ public class main_appearance {
 					e1.printStackTrace();
 				}
 				ArrayList<DTO> data2 = pa.getdata();
+				taskGroup = new ButtonGroup();
+				JRadioButton[] task = new JRadioButton[9];
 				int height = 150;
+				int i = 0;
 				for(DTO d: data2) {
-					JButton task = new JButton(d.toString());
-					task.setBounds(250, height, 700, 36);
+					task[i] = new JRadioButton(d.toString());
+					task[i].setBounds(250, height, 700, 36);
 					height+=40;
-					if(height < 550)
-						taskPage.add(task);
+					if(i < 8)
+						taskPage.add(task[i]);
+					else
+						break;
+					i++;
 					System.out.println(d.toString());
 				}
 				taskPage.setVisible(true);
@@ -793,10 +819,14 @@ class inputFrame extends JDialog {
 		JLabel stlabe2 = new JLabel("");
 		JLabel lab1 = new JLabel("Date,Time: ");
 		JTextField date = new JTextField(20);
-		JLabel lab2 = new JLabel("Title");
+		JLabel lab2 = new JLabel("Title: ");
 		JTextField topic = new JTextField(10);
-		JLabel lab3 = new JLabel("Content");
+		JLabel lab3 = new JLabel("Content: ");
 		JTextField content = new JTextField(10);
+		JLabel lab4 = new JLabel("project_id: ");
+		JTextField project_id = new JTextField(20);
+		JLabel lab5 = new JLabel("location: ");
+		JTextField location = new JTextField(20);
 		JLabel stlabe3 = new JLabel("");
 		JButton pbtn = new JButton("Add");
 
@@ -816,25 +846,38 @@ class inputFrame extends JDialog {
 		panel.add(topic);
 		panel.add(lab3);
 		panel.add(content);
+		panel.add(lab4);
+		panel.add(project_id);
+		panel.add(lab5);
+		panel.add(location);
 		panel.add(stlabe3);
 		panel.add(pbtn, BorderLayout.SOUTH);
 
 		pbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent T) {
-
+				DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
+				meetingDTO md = new meetingDTO();
+				md.setProject_id(Integer.parseInt(project_id.getText()));
 				try {
-					BufferedWriter bf = new BufferedWriter(new FileWriter("meetingRecord.txt", true));
-					bf.write("Date,Time :" + date.getText() + "\n");
-					bf.write("Title :" + topic.getText() + "\n");
-					bf.write("Content :" + content.getText() + "\n");
-					bf.close();
+					md.setDate(new Date(sdf.parse(date.getText()).getTime()));
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				md.setContent(content.getText());
+				md.setLocation(location.getText());
+				
+				Insertdao pa = new Insertdao("taskPage", md);
+				
+				try {
+					pa.prepareDB();
 					JOptionPane.showMessageDialog(null, "Data saving complete.");
-				}
-
-				catch (Exception e) {
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "Data saving fail. Try again!");
-
 				}
+				
+				System.out.println(md.toString());
 			}
 		});
 
