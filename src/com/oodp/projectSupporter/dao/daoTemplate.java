@@ -19,10 +19,6 @@ public abstract class daoTemplate {
 	protected String check;
 	protected Boolean result = false;
 	
-	public daoTemplate(String check){
-		this.check = check;
-	}
-	
 	public final void prepareDB() throws ClassNotFoundException, SQLException {
 		hookmethod1();
 	    query = new StringBuffer();

@@ -1,5 +1,7 @@
 package com.oodp.projectSupporter.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.oodp.projectSupporter.dto.DTO;
@@ -7,19 +9,24 @@ import com.oodp.projectSupporter.dto.meetingDTO;
 import com.oodp.projectSupporter.dto.taskDTO;
 import com.oodp.projectSupporter.dto.userDTO;
 
-public class logindao extends daoTemplate{
+public class logindao implements Function{
 	DTO is;
+	int r;
+	Boolean result = false;
+	String check;
 	public logindao(String check, DTO is) {
-		super(check);
+		this.check = check;
 		this.is = is;
 		// TODO Auto-generated constructor stub
 	}
-	public void hookmethod1() {
+	public String sql() {
+		String sql = null;
 		if(check.compareTo("login") == 0) {
 			sql = "select * from user where mail = ?;";
 		}
+		return sql;
 	}
-	public void hookmethod2() throws SQLException {
+	public void setting(PreparedStatement pstmt, ResultSet rs) throws SQLException {
 		rs = pstmt.executeQuery();
 		if(check.compareTo("login") == 0) {
 			userDTO userInfo = (userDTO) is;

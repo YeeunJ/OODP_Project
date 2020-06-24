@@ -1,5 +1,7 @@
 package com.oodp.projectSupporter.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.oodp.projectSupporter.dto.DTO;
@@ -7,16 +9,18 @@ import com.oodp.projectSupporter.dto.meetingDTO;
 import com.oodp.projectSupporter.dto.taskDTO;
 import com.oodp.projectSupporter.dto.userDTO;
 
-public class Updatedao extends daoTemplate {
+public class Updatedao implements Function {
 	DTO is;
 	int r;
+	String check;
 	public Updatedao(String check, DTO is) {
-		super(check);
+		this.check = check;
 		this.is = is;
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void hookmethod1() {
+	public String sql() {
+		String sql = null;
 		if(check.compareTo("taskPage") == 0) {
 			sql = "UPDATE task SET member_id = ?, due_date = ?, title = ?, content = ?, check = ? WHERE project_id = ?;";
 		}else if(check.compareTo("meetingPage") == 0) {
@@ -24,8 +28,10 @@ public class Updatedao extends daoTemplate {
 		}else if(check.compareTo("register") == 0) {
 			sql = "UPDATE user SET mail = ?, password = ?, name = ? WHERE user_id = ?;";
 		}
+		return sql;
 	}
-	public void hookmethod2() throws SQLException {
+	
+	public void setting(PreparedStatement pstmt, ResultSet rs) throws SQLException {
 		if(check.compareTo("taskPage") == 0) {
 			taskDTO task = (taskDTO)is;
 		    pstmt.setLong(1, task.getMember_id());
