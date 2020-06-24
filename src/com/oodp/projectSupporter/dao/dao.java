@@ -4,9 +4,12 @@ import java.sql.SQLException;
 
 public class dao extends daoTemplate{
 	
-	
+
 	public dao(function c) {
 		super(c);
+		// TODO Auto-generated constructor stub
+	}
+	public dao() {
 		// TODO Auto-generated constructor stub
 	}
 	public void hookmethod1() {
@@ -14,5 +17,9 @@ public class dao extends daoTemplate{
 	}
 	public void hookmethod2() throws SQLException {
 		c.setting(pstmt, rs);
+	}
+	
+	public void changedao(function c) {
+		this.c = c;
 	}
 }

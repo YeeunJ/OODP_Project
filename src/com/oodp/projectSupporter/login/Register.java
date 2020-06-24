@@ -8,10 +8,14 @@ import com.oodp.projectSupporter.dto.DTO;
 import com.oodp.projectSupporter.dto.userDTO;
 
 public class Register {
-	public void registerexe() throws ClassNotFoundException, SQLException{
-		DTO is;
-		is = new userDTO();
+	DTO is;
+	public void registerexe(userDTO user) throws ClassNotFoundException, SQLException{
+		is = user;
 		Insertdao regist = new Insertdao("register", is);
 		dao d = new dao(regist);
+		d.prepareDB();
+	}
+	public userDTO getData() {
+		return (userDTO) is;
 	}
 }

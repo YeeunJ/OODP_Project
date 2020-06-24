@@ -19,6 +19,9 @@ public abstract class daoTemplate {
 	protected function c;
 	protected Boolean result = false;
 	
+	public daoTemplate() {
+		
+	}
 	public daoTemplate(function c){
 		this.c = c;
 	}

@@ -11,7 +11,7 @@ import com.oodp.projectSupporter.dto.taskDTO;
 
 public class PrintAlldao implements function{
 	String check;
-	ArrayList<DTO> data;
+	ArrayList<DTO> data = new ArrayList<DTO>();
 	
 	public PrintAlldao(String check) {
 		this.check = check;
@@ -54,5 +54,8 @@ public class PrintAlldao implements function{
 			    data.add((DTO)meeting);
 			    } 
 		}
+	}
+	public ArrayList<DTO> getdata(){
+		return data;
 	}
 }

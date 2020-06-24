@@ -26,7 +26,6 @@ public class logindao implements function {
 		return sql;
 	}
 	public void setting(PreparedStatement pstmt, ResultSet rs) throws SQLException {
-		rs = pstmt.executeQuery();
 		if(check.compareTo("login") == 0) {
 			userDTO userInfo = (userDTO) is;
 			pstmt.setString(1, userInfo.getMail());
@@ -35,11 +34,19 @@ public class logindao implements function {
 			if(rs.next()) {
 				if(rs.getString("password").compareTo(userInfo.getPassword())== 0) {
 					result = true;
+					user.setUser_id(rs.getInt("id"));
 					user.setMail(rs.getString("mail"));
 					user.setName(rs.getString("name"));
+					is = user;
 				}
 		    }
 		}
 	}
-
+	public Boolean getResult() {
+		return result;
+	}
+	
+	public DTO getData() {
+		return is;
+	}
 }

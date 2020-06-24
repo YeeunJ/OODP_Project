@@ -37,9 +37,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import com.oodp.ThemeFactory.ThemeSelection;
+import com.oodp.projectSupporter.ThemeFactory.ThemeSelection;
 import com.oodp.projectSupporter.dao.Insertdao;
 import com.oodp.projectSupporter.dao.PrintAlldao;
+import com.oodp.projectSupporter.dao.dao;
+import com.oodp.projectSupporter.dbconnection.connection;
 import com.oodp.projectSupporter.dto.DTO;
 import com.oodp.projectSupporter.dto.meetingDTO;
 import com.oodp.projectSupporter.dto.userDTO;
@@ -47,20 +49,28 @@ import com.oodp.projectSupporter.login.Button;
 import com.oodp.projectSupporter.login.Command;
 import com.oodp.projectSupporter.login.Login;
 import com.oodp.projectSupporter.login.LoginCommand;
+import com.oodp.projectSupporter.login.RegisterCommand;
 
 //import com.oodp.projectSupporter.meetingPage.inputFrame;
 
 public class main_appearance {
-	
-	ArrayList<String> mailList = new ArrayList<>();
-	ArrayList<String> passwordList = new ArrayList<>();
-	HashMap<String, Integer>managerMap = new HashMap();
-	
+	dao d = new dao();
+	//ArrayList<String> mailList = new ArrayList<>();
+	//ArrayList<String> passwordList = new ArrayList<>();
+	//HashMap<String, Integer>managerMap = new HashMap();
+	Button loginButton = new Button();
+	userDTO user = new userDTO();
 	inputFrame tf2;
 	
 	private JFrame frame;
 	private JTextField IDtext;
 	private JPasswordField passwordField;
+	private JLabel lblName;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
@@ -79,6 +89,7 @@ public class main_appearance {
 	private JTextField textField_19;
 	private JLabel lblTeam;
 	private JTextField textField_20;
+	private JTextField positionFild;
 	private JButton logOutButton;
 	private ButtonGroup taskGroup;
 	private meetingDTO md = new meetingDTO();
@@ -87,8 +98,12 @@ public class main_appearance {
 	
 	/**
 	 * Launch the application.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String[] args) {
+    
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		Connection conn = connection.getInstance().getConnection();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -113,9 +128,9 @@ public class main_appearance {
 	 */
 	private void initialize() {
 		
-		mailList.add("Siin");
-		passwordList.add("1234");
-		managerMap.put("Siin", 1);
+		//mailList.add("Siin");
+		//passwordList.add("1234");
+		//managerMap.put("Siin", 1);
 		
 		frame = new JFrame();
 		frame.setTitle("Program");
@@ -142,7 +157,7 @@ public class main_appearance {
 		lblNewLabel_4.setBounds(133, 318, 128, 34);
 		mainPage.add(lblNewLabel_4);
 
-		UserWelcomeText = new JLabel("Welcome " +"Siin" );
+		UserWelcomeText = new JLabel("Welcome " + user.getName());
 		UserWelcomeText.setFont(new Font("굴림", Font.PLAIN, 24));
 		UserWelcomeText.setBounds(133, 151, 264, 73);
 		mainPage.add(UserWelcomeText);
@@ -156,7 +171,7 @@ public class main_appearance {
 		// ###########################<Login Page>###############################
 		
 		ImagePanel Login_Page = new ImagePanel(
-				new ImageIcon("/Users/bsi05/oodpProject/OODP_Project/Image/Login2.jpg").getImage());
+				new ImageIcon("/Users/jeong-yeeun/git/OODP_Project/Image/Login2.jpg").getImage());
 		Login_Page.setBounds(0, 0, 1000, 640);
 		frame.getContentPane().add(Login_Page);
 		frame.setSize(Login_Page.getWidth(), Login_Page.getHeight());
@@ -234,7 +249,7 @@ public class main_appearance {
 		textField_18.setBounds(324, 234, 156, 30);
 		RegistrationPage.add(textField_18);
 
-		JTextField positionFild = new JTextField();
+		positionFild = new JTextField();
 	    positionFild = new JTextField();
 	    positionFild.setColumns(10);
 	    positionFild.setBounds(700, 234, 156, 30);
@@ -265,9 +280,38 @@ public class main_appearance {
 		registrationDoneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login_Page.setVisible(true);
-				mailList.add(textField_18.getText());
-				passwordList.add(textField_19.getText());
-				managerMap.put(textField_18.getText(), 0);
+				
+				//mailList.add(textField_18.getText());
+				//passwordList.add(textField_19.getText());
+				//managerMap.put(textField_18.getText(), 0);
+				System.out.println(textField_18.getText());
+				System.out.println(textField_19.getText());
+				System.out.println(textField_20.getText());
+				System.out.println(positionFild.getText());
+				user.setMail(textField_18.getText());
+				user.setPassword(textField_19.getText());
+				user.setName(textField_20.getText());
+				RegisterCommand regist = new RegisterCommand(user);
+				loginButton.setCommand(regist);
+				try {
+					loginButton.pressed();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "register success!!");
+				/*
+				user.setMail(textField_18.getText());
+				user.setPassword(textField_19.getText());
+				user.setName(textField_18.getText());
+				if(result) {
+					user = loginButton.getData();
+					System.out.println(user.toString());
+					Login_Page.setVisible(false);
+					mainPage.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "You failed to log in");
+				}*/
 				RegistrationPage.setVisible(false);
 			}
 		});
@@ -298,23 +342,24 @@ public class main_appearance {
 		PageMaster myPageMaster = new PageMaster(new myPageMaker());
 		JPanel myPage = myPageMaster.createPage();
 		frame.getContentPane().add(myPage);
-
-		JLabel lblName = new JLabel("Name :");
+		
+		
+		lblName = new JLabel("Name :");
 		lblName.setFont(new Font("굴림", Font.BOLD, 20));
 		lblName.setBounds(569, 197, 97, 56);
 		myPage.add(lblName);
 
-		JTextField textField = new JTextField();
+		textField = new JTextField();
 		textField.setBounds(687, 216, 96, 21);
 		myPage.add(textField);
 		textField.setColumns(10);
 
-		JTextField textField_1 = new JTextField();
+		textField_1 = new JTextField();
 		textField_1.setBounds(687, 293, 96, 21);
 		myPage.add(textField_1);
 		textField_1.setColumns(10);
 
-		JTextField textField_2 = new JTextField();
+		textField_2 = new JTextField();
 		textField_2.setBounds(687, 426, 96, 21);
 		myPage.add(textField_2);
 		textField_2.setColumns(10);
@@ -324,7 +369,7 @@ public class main_appearance {
 		lblProject.setBounds(569, 477, 97, 56);
 		myPage.add(lblProject);
 
-		JTextField textField_3 = new JTextField();
+		textField_3 = new JTextField();
 		textField_3.setBounds(687, 497, 96, 21);
 		myPage.add(textField_3);
 		textField_3.setColumns(10);
@@ -334,7 +379,7 @@ public class main_appearance {
 		lblPosition.setBounds(569, 340, 97, 56);
 		myPage.add(lblPosition);
 
-		JTextField textField_4 = new JTextField();
+		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(687, 360, 96, 21);
 		myPage.add(textField_4);
@@ -357,8 +402,9 @@ public class main_appearance {
 		JPanel meetingPage = meetingPageMaster.createPage();
 		frame.getContentPane().add(meetingPage);
 		PrintAlldao pa = new PrintAlldao("meetingPage");
+		d.changedao(pa);
 		try {
-			pa.prepareDB();
+			d.prepareDB();
 		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -543,10 +589,32 @@ public class main_appearance {
 		LoginEnterBttn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int count = 0;
-				int i = 0;
+				//int count = 0;
+				//int i = 0;
+				Boolean result = false;
+				user.setMail(IDtext.getText());
+				user.setPassword(String.valueOf(passwordField.getPassword()));
+				LoginCommand login = new LoginCommand(user);
+				loginButton.setCommand(login);
+				try {
+					result = loginButton.pressed();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				if(result) {
+					user = loginButton.getData();
+					UserWelcomeText.setText("Welcome " + user.getName());
+					System.out.println(user.toString());
+					Login_Page.setVisible(false);
+					mainPage.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "You failed to log in");
+				}
+				/*
 				for(String arr : mailList) {
 					if(arr.equals(IDtext.getText())) {
+						//System.out.println(String.valueOf(passwordField.getPassword()));
 						if(Arrays.equals(passwordField.getPassword(), passwordList.get(i).toCharArray())) {
 							currentUser = IDtext.getText();
 							count++;
@@ -561,7 +629,7 @@ public class main_appearance {
 					mainPage.setVisible(true);
 				}else {
 					JOptionPane.showMessageDialog(null, "You failed to log in");
-				}
+				}*/
 				/*
 				userDTO user = new userDTO();
 				user.setMail(IDtext.getText());
@@ -679,13 +747,15 @@ public class main_appearance {
 		JButton taskAddEditButton = new JButton("Task Add & Edit");
 		taskPageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MangerCheckClass managerCheckClass = new MangerCheckClass(managerMap.get(currentUser));
+				
+				MangerCheckClass managerCheckClass = new MangerCheckClass(user.getUser_id());
 				taskAddEditButton.setVisible(managerCheckClass.checkResult());
 				
 				mainPage.setVisible(false);
 				PrintAlldao pa = new PrintAlldao("taskPage");
+				d.changedao(pa);
 				try {
-					pa.prepareDB();
+					d.prepareDB();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -731,7 +801,7 @@ public class main_appearance {
 				// TODO Auto-generated method stub
 				mainPage.setVisible(false);
 				myPage.setVisible(true);
-				MangerCheckClass managerCheckClass = new MangerCheckClass(managerMap.get(currentUser));
+				MangerCheckClass managerCheckClass = new MangerCheckClass(user.getUser_id());
 				btnNewButton.setVisible(managerCheckClass.checkResult());
 			}
 
@@ -902,7 +972,7 @@ class ImagePanel extends JPanel {
 
 class inputFrame extends JDialog {
 	JPanel panel = new JPanel();
-
+	dao d = new dao();
 	public inputFrame() {
 		getContentPane().add(panel);
 
@@ -959,9 +1029,9 @@ class inputFrame extends JDialog {
 				md.setLocation(location.getText());
 				
 				Insertdao pa = new Insertdao("taskPage", md);
-				
+				d.changedao(pa);
 				try {
-					pa.prepareDB();
+					d.prepareDB();
 					JOptionPane.showMessageDialog(null, "Data saving complete.");
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block

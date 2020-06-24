@@ -1,7 +1,7 @@
 package com.oodp.projectSupporter.dto;
 
 public class userDTO implements DTO {
-	private int user_id;
+	private int user_id = 0;
 	private String mail;
 	private String password;
 	private String name;
@@ -31,9 +31,10 @@ public class userDTO implements DTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 	@Override
 	public String toString() {
-		return "userDTO [mail=" + mail + ", password=" + password + ", name=" + name + "]";
+		return "userDTO [user_id=" + user_id + ", mail=" + mail + ", password=" + password + ", name=" + name + "]";
 	}
+	
+	
 }

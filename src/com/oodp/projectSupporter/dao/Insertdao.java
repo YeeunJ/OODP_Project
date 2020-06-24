@@ -11,6 +11,7 @@ import com.oodp.projectSupporter.dto.userDTO;
 
 public class Insertdao implements function{
 	String check;
+	Boolean result = false;
 	DTO is;
 	int r;
 	public Insertdao(String check, DTO is) {
@@ -52,5 +53,6 @@ public class Insertdao implements function{
 			pstmt.setString(3, user.getName());
 		}
 		r = pstmt.executeUpdate();
+		result = true;
 	}
 }
