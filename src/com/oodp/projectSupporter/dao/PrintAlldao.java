@@ -1,25 +1,32 @@
 package com.oodp.projectSupporter.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.oodp.projectSupporter.dto.DTO;
 import com.oodp.projectSupporter.dto.meetingDTO;
 import com.oodp.projectSupporter.dto.taskDTO;
 
-public class PrintAlldao extends daoTemplate{
+public class PrintAlldao implements function{
+	String check;
+	ArrayList<DTO> data;
 	
 	public PrintAlldao(String check) {
-		super(check);
+		this.check = check;
 		// TODO Auto-generated constructor stub
 	}
-	public void hookmethod1() {
+	public String sql() {
+		String sql = null;
 		if(check.compareTo("taskPage") == 0) {
 			sql = "SELECT * FROM task;";
 		}else if(check.compareTo("meetingPage") == 0) {
 			sql = "SELECT * FROM meeting order by date DESC;";
 		}
+		return sql;
 	}
-	public void hookmethod2() throws SQLException {
+	public void setting(PreparedStatement pstmt, ResultSet rs) throws SQLException {
 		rs = pstmt.executeQuery();
 		if(check.compareTo("taskPage") == 0) {
 			taskDTO task;

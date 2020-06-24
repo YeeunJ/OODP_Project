@@ -16,11 +16,11 @@ public abstract class daoTemplate {
 	private StringBuffer query;
 	protected ArrayList<DTO> data = new ArrayList<DTO>();
 	protected String sql;
-	protected String check;
+	protected function c;
 	protected Boolean result = false;
 	
-	public daoTemplate(String check){
-		this.check = check;
+	public daoTemplate(function c){
+		this.c = c;
 	}
 	
 	public final void prepareDB() throws ClassNotFoundException, SQLException {
