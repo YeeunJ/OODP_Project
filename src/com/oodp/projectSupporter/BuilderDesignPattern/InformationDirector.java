@@ -1,4 +1,4 @@
-package BuilderDesignPattern;
+package com.oodp.projectSupporter.BuilderDesignPattern;
 
 public class InformationDirector {
 	private InformationBuilder informtionBuilder;

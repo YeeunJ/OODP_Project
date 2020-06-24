@@ -1,4 +1,4 @@
-package BuilderDesignPattern;
+package com.oodp.projectSupporter.BuilderDesignPattern;
 
 abstract class InformationBuilder {
 	protected InformationTank informationTank;

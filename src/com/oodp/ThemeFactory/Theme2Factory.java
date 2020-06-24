@@ -1,35 +1,33 @@
-package ThemeFactory;
+package com.oodp.ThemeFactory;
 
 import java.awt.Color;
 
-public class Theme1Factory implements ThemeFactory{
+public class Theme2Factory implements ThemeFactory{
 
 	@Override
 	public ButtonTheme createButtonTheme() {
 		// TODO Auto-generated method stub
-		return new Theme1Button();
+		return new Theme2Button();
 	}
 
 	@Override
 	public BackgroundTheme createBackgroundTheme() {
 		// TODO Auto-generated method stub
-		return new Theme1Background();
+		
+		return new Theme2Background();
 	}
 
 	@Override
 	public Color bgColorReturn() {
 		// TODO Auto-generated method stub
-		Theme1Button t1btn = new Theme1Button();
-		return t1btn.btnColor;
+		Theme2Background t2bg = new Theme2Background();
+		return t2bg.bgColor;	
 	}
 
 	@Override
 	public Color btnColorReturn() {
 		// TODO Auto-generated method stub
-		Theme1Background t1bg = new Theme1Background();
-		return t1bg.bgColor;
+		Theme2Button t2btn = new Theme2Button();
+		return t2btn.btnColor;	
 	}
-
-	
-
 }
