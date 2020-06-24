@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -46,10 +47,18 @@ import com.oodp.projectSupporter.login.Command;
 import com.oodp.projectSupporter.login.Login;
 import com.oodp.projectSupporter.login.LoginCommand;
 
+import ThemeFactory.ThemeSelection;
+
 //import com.oodp.projectSupporter.meetingPage.inputFrame;
 
 public class main_appearance {
+	
+	ArrayList<String> mailList = new ArrayList<>();
+	ArrayList<String> passwordList = new ArrayList<>();
+	HashMap<String, Integer>managerMap = new HashMap();
+	
 	inputFrame tf2;
+	
 	private JFrame frame;
 	private JTextField IDtext;
 	private JPasswordField passwordField;
@@ -74,6 +83,9 @@ public class main_appearance {
 	private JButton logOutButton;
 	private ButtonGroup taskGroup;
 	private meetingDTO md = new meetingDTO();
+	int check = 0;
+    private String currentUser;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -101,14 +113,21 @@ public class main_appearance {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		mailList.add("Siin");
+		passwordList.add("1234");
+		managerMap.put("Siin", 1);
+		
 		frame = new JFrame();
 		frame.setTitle("Program");
 
 		// ###########################<Main Page>###############################
 		PageMaster mainPageMaster = new PageMaster(new mainPageMaker());
 		JPanel mainPage = mainPageMaster.createPage();
+		
+		
 		frame.getContentPane().add(mainPage);
-
+		
 		lblNewLabel_3 = new JLabel("Main Page");
 		lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 31));
 		lblNewLabel_3.setBounds(133, 55, 213, 73);
@@ -124,7 +143,7 @@ public class main_appearance {
 		lblNewLabel_4.setBounds(133, 318, 128, 34);
 		mainPage.add(lblNewLabel_4);
 
-		UserWelcomeText = new JLabel("Welcome " + "Siin!");
+		UserWelcomeText = new JLabel("Welcome " +"Siin" );
 		UserWelcomeText.setFont(new Font("굴림", Font.PLAIN, 24));
 		UserWelcomeText.setBounds(133, 151, 264, 73);
 		mainPage.add(UserWelcomeText);
@@ -136,8 +155,9 @@ public class main_appearance {
 		// ######################################################################
 
 		// ###########################<Login Page>###############################
+		
 		ImagePanel Login_Page = new ImagePanel(
-				new ImageIcon("/Users/jeong-yeeun/git/OODP_Project/Image/Login2.jpg").getImage());
+				new ImageIcon("/Users/bsi05/oodpProject/OODP_Project/Image/Login2.jpg").getImage());
 		Login_Page.setBounds(0, 0, 1000, 640);
 		frame.getContentPane().add(Login_Page);
 		frame.setSize(Login_Page.getWidth(), Login_Page.getHeight());
@@ -153,7 +173,8 @@ public class main_appearance {
 		IDtext.setToolTipText("");
 		Login_Page.add(IDtext);
 		IDtext.setColumns(10);
-
+		
+		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(375, 456, 279, 32);
 		passwordField.setToolTipText("");
@@ -191,6 +212,11 @@ public class main_appearance {
 		lblMail.setFont(new Font("굴림", Font.BOLD, 20));
 		lblMail.setBounds(247, 226, 103, 41);
 		RegistrationPage.add(lblMail);
+		
+		JLabel lblMail1 = new JLabel("Project :");
+		lblMail1.setFont(new Font("굴림", Font.BOLD, 20));
+		lblMail1.setBounds(600, 226, 103, 41);
+		RegistrationPage.add(lblMail1);
 
 		lblPassword_2 = new JLabel("Password :");
 		lblPassword_2.setFont(new Font("굴림", Font.BOLD, 20));
@@ -202,11 +228,20 @@ public class main_appearance {
 		lblNewLabel_16.setBounds(110, 51, 299, 51);
 		RegistrationPage.add(lblNewLabel_16);
 
+		
+		
 		textField_18 = new JTextField();
 		textField_18.setColumns(10);
 		textField_18.setBounds(324, 234, 156, 30);
 		RegistrationPage.add(textField_18);
 
+		JTextField positionFild = new JTextField();
+	    positionFild = new JTextField();
+	    positionFild.setColumns(10);
+	    positionFild.setBounds(700, 234, 156, 30);
+		RegistrationPage.add(positionFild);
+
+		
 		textField_19 = new JTextField();
 		textField_19.setColumns(10);
 		textField_19.setBounds(324, 325, 156, 30);
@@ -231,6 +266,9 @@ public class main_appearance {
 		registrationDoneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login_Page.setVisible(true);
+				mailList.add(textField_18.getText());
+				passwordList.add(textField_19.getText());
+				managerMap.put(textField_18.getText(), 0);
 				RegistrationPage.setVisible(false);
 			}
 		});
@@ -499,12 +537,32 @@ public class main_appearance {
 		// ###################################################################
 		// ###################################################################
 
+		
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<LoginPage>@@@@@@@@@@@@@@@@@@@@@@@@@
 		JButton LoginEnterBttn = new JButton("Enter");
 		LoginEnterBttn.setBounds(375, 513, 279, 40);
 		LoginEnterBttn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int count = 0;
+				int i = 0;
+				for(String arr : mailList) {
+					if(arr.equals(IDtext.getText())) {
+						if(Arrays.equals(passwordField.getPassword(), passwordList.get(i).toCharArray())) {
+							currentUser = IDtext.getText();
+							count++;
+							break;
+						}
+					}
+					i++;
+				}
+				
+				if(count==1) {
+					Login_Page.setVisible(false);
+					mainPage.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "You failed to log in");
+				}
 				/*
 				userDTO user = new userDTO();
 				user.setMail(IDtext.getText());
@@ -523,13 +581,13 @@ public class main_appearance {
 				}*/
 				
 				// TODO Auto-generated method stub
-				if (IDtext.getText().equals("Siin")
+				/*if (IDtext.getText().equals("Siin")
 						&& (Arrays.equals(passwordField.getPassword(), "1234".toCharArray()))) {
 					Login_Page.setVisible(false);
 					mainPage.setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null, "You failed to log in");
-				}
+				}*/
 			}
 		});
 		Login_Page.add(LoginEnterBttn);
@@ -574,7 +632,9 @@ public class main_appearance {
 		taskAddEditPage.add(btnNewButton_2);
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<myPageAddEditPage>@@@@@@@@@@@@@@@@@@@@@@@@@
+		
 		JButton btnNewButton = new JButton("Member Authority Edit");
+		
 		btnNewButton.setFont(new Font("굴림", Font.BOLD, 20));
 		btnNewButton.setBounds(352, 385, 314, 39);
 		myPageAddEditPage.add(btnNewButton);
@@ -617,8 +677,12 @@ public class main_appearance {
 		JButton taskPageButton = new JButton("Task Page");
 		taskPageButton.setBounds(571, 490, 161, 36);
 		mainPage.add(taskPageButton);
+		JButton taskAddEditButton = new JButton("Task Add & Edit");
 		taskPageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MangerCheckClass managerCheckClass = new MangerCheckClass(managerMap.get(currentUser));
+				taskAddEditButton.setVisible(managerCheckClass.checkResult());
+				
 				mainPage.setVisible(false);
 				PrintAlldao pa = new PrintAlldao("taskPage");
 				try {
@@ -656,7 +720,9 @@ public class main_appearance {
 				Login_Page.setVisible(true);
 			}
 		});
-
+		
+		
+		
 		JButton myPageButton = new JButton("My Page");
 		myPageButton.setBounds(571, 362, 161, 36);
 		mainPage.add(myPageButton);
@@ -666,6 +732,8 @@ public class main_appearance {
 				// TODO Auto-generated method stub
 				mainPage.setVisible(false);
 				myPage.setVisible(true);
+				MangerCheckClass managerCheckClass = new MangerCheckClass(managerMap.get(currentUser));
+				btnNewButton.setVisible(managerCheckClass.checkResult());
 			}
 
 		});
@@ -740,7 +808,8 @@ public class main_appearance {
 			}
 		});
 
-		JButton taskAddEditButton = new JButton("Task Add & Edit");
+		
+		
 		taskAddEditButton.setFont(new Font("굴림", Font.BOLD, 20));
 		taskAddEditButton.setBounds(740, 526, 233, 71);
 		taskPage.add(taskAddEditButton);
@@ -774,6 +843,29 @@ public class main_appearance {
 		taskDetailPageBackButton.setBounds(179, 548, 124, 36);
 		taskDetailPage.add(taskDetailPageBackButton);
 
+		
+		JButton themeChangeButton = new JButton("Theme Change");
+		themeChangeButton.setBounds(433, 562, 204, 45);
+		mainPage.add(themeChangeButton);
+		themeChangeButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(check == 0) {
+					check = 1;
+				}else {
+					check = 0;
+				}
+				ThemeSelection themeSelection = new ThemeSelection();
+				themeSelection.createTheme(check);
+				mainPage.setBackground(themeSelection.bgColorReturn());
+				taskPageButton.setBackground(themeSelection.btnColorReturn());
+				meetingPageButton.setBackground(themeSelection.btnColorReturn());
+				myPageButton.setBackground(themeSelection.btnColorReturn());
+			}
+			
+		});
 		// ###################################################################
 		// ###################################################################
 		// ###################################################################
