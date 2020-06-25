@@ -12,9 +12,16 @@ import com.oodp.projectSupporter.dto.taskDTO;
 public class PrintAlldao implements function{
 	String check;
 	ArrayList<DTO> data = new ArrayList<DTO>();
+	ArrayList<Integer> p_id = new ArrayList<Integer>();
+	String p_name = "";
 	
 	public PrintAlldao(String check) {
 		this.check = check;
+		// TODO Auto-generated constructor stub
+	}
+	public PrintAlldao(String check, ArrayList<Integer> p_id) {
+		this.check = check;
+		this.p_id = p_id;
 		// TODO Auto-generated constructor stub
 	}
 	public String sql() {
@@ -23,6 +30,8 @@ public class PrintAlldao implements function{
 			sql = "SELECT * FROM task;";
 		}else if(check.compareTo("meetingPage") == 0) {
 			sql = "SELECT * FROM meeting order by date DESC;";
+		}else if(check.compareTo("project") == 0) {
+			sql = "SELECT * FROM project;";
 		}
 		return sql;
 	}
@@ -53,9 +62,21 @@ public class PrintAlldao implements function{
 			    meeting.setFile(rs.getString("file"));
 			    data.add((DTO)meeting);
 			    } 
+		}else if(check.compareTo("project") == 0) {
+			while(rs.next()) {
+				for(int d: p_id) {
+					if(d == rs.getInt("id")) {
+						p_name += rs.getString("name");
+						p_name += "  ";
+					}
+				}
+			} 
 		}
 	}
 	public ArrayList<DTO> getdata(){
 		return data;
+	}
+	public String getproject(){
+		return p_name;
 	}
 }

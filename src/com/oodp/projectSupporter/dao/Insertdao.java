@@ -41,6 +41,9 @@ public class Insertdao implements function{
 		    pstmt.setString(5, task.getContent());
 		}else if(check.compareTo("meetingPage") == 0) {
 			meetingDTO meeting = (meetingDTO)is;
+			System.out.println(meeting.getDate());
+			System.out.println(meeting.toString());
+			
 			pstmt.setString(1, meeting.getDate().toString());
 			pstmt.setString(2, meeting.getContent());
 			pstmt.setString(3, meeting.getLocation());
