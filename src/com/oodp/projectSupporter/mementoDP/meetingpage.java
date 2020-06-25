@@ -2,14 +2,14 @@ package com.oodp.projectSupporter.mementoDP;
 
 import java.util.ArrayList;
 
-//¿À¸®Áö³×ÀÌÅÍ ¿ªÇÒ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 public class meetingpage {
 
 	  private String date;
 	  private String location;
 	  private String content;
 	   
-	  private ArrayList<String> state = new ArrayList<String>();  //¹ÌÆÃ ÀÇ »óÅÂ ÀúÀå
+	  private ArrayList<String> state = new ArrayList<String>();  //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	        
 	        public void setState(String d,String l, String c){  
 	        	date = d;
@@ -27,5 +27,9 @@ public class meetingpage {
 	          
 	        public void getM_StateFromMemento(Memento Memento){  
 	            state = Memento.getMeetingpage();  
-	        }  
+	        } 
+	        /*
+	        public ArrayList<DTO> getData(){
+	        	return data2;
+	        }*/
 }
