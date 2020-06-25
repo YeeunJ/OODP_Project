@@ -5,55 +5,55 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main implements ActionListener {
-	
-	meetingpage originator1 = new meetingpage();
-	taskpage originator2 = new taskpage();
+   
+   meetingpage originator1 = new meetingpage();
+   taskpage originator2 = new taskpage();
     Caretaker careTaker = new Caretaker();  
-	
-	Button btn1; //µÇµ¹¸®±â ¹öÆ°
-	Button btn2;//»õ·Î°íÄ§ ¹öÆ° ´Ù½Ã
-	
-	µî·Ï¹öÆ°À» ´©¸£¸é ¸Ş¸àÅä·Î »óÅÂ ÀúÀå ¹× º¹¿ø½ÃÁ¡ Ãß°¡{  
-	 originator1.setState(date,location,content); //ÃÖ±Ù µî·ÏÇÑ µ¥ÀÌÅÍµé!
-     careTaker.addMeeting(originator1.saveM_StateToMemento());  //º¹¿ø ½ÃÁ¡ Ãß°¡
-	 
-	 originator2.setState(project_id,member_id,title,due_date,check); //ÃÖ±Ù µî·ÏÇÑ µ¥ÀÌÅÍµé!
-     careTaker.addTask(originator2.saveT_StateToMemento());  //º¹¿ø ½ÃÁ¡ Ãß°¡
-	}
-	°¢ ÆäÀÌÁöÀÇ Çö»óÅÂ È®ÀÎ °¡´É- »õ·Î°íÄ§±â´É?{
-	 originator1.getState(); //¹ÌÆÃÆäÀÌÁöÀÇ Çö»óÅÂ
-	 originator2.getState(); //ÅÂ½ºÅ©ÆäÀÌÁöÀÇ Çö»óÅÂ
-	}
-	 µÇµ¹¾Æ°¡±â ¹öÆ°À» ´©¸£¸é!{
-	 originator1.getM_StateFromMemento(careTaker.getMeeting(0));  //¹ÌÆÃÆäÀÌÁöÀÇ Àü»óÅÂ¸¦ °¡Á®¿À°í
-     System.out.println("ÀúÀåµÈ Àü »óÅÂ: " + originator1.getState()); //³ªÅ¸³½´Ù
+   
+   Button btn1; //ë˜ëŒë¦¬ê¸° ë²„íŠ¼
+   Button btn2;//ìƒˆë¡œê³ ì¹¨ ë²„íŠ¼ ë‹¤ì‹œ
+   
+   ë“±ë¡ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ë©”ë©˜í† ë¡œ ìƒíƒœ ì €ì¥ ë° ë³µì›ì‹œì  ì¶”ê°€{  
+    originator1.setState(date,location,content); //ìµœê·¼ ë“±ë¡í•œ ë°ì´í„°ë“¤!
+     careTaker.addMeeting(originator1.saveM_StateToMemento());  //ë³µì› ì‹œì  ì¶”ê°€
+    
+    originator2.setState(project_id,member_id,title,due_date,check); //ìµœê·¼ ë“±ë¡í•œ ë°ì´í„°ë“¤!
+     careTaker.addTask(originator2.saveT_StateToMemento());  //ë³µì› ì‹œì  ì¶”ê°€
+   }
+   ê° í˜ì´ì§€ì˜ í˜„ìƒíƒœ í™•ì¸ ê°€ëŠ¥- ìƒˆë¡œê³ ì¹¨ê¸°ëŠ¥?{
+    originator1.getState(); //ë¯¸íŒ…í˜ì´ì§€ì˜ í˜„ìƒíƒœ
+    originator2.getState(); //íƒœìŠ¤í¬í˜ì´ì§€ì˜ í˜„ìƒíƒœ
+   }
+    ë˜ëŒì•„ê°€ê¸° ë²„íŠ¼ì„ ëˆ„ë¥´ë©´!{
+    originator1.getM_StateFromMemento(careTaker.getMeeting(0));  //ë¯¸íŒ…í˜ì´ì§€ì˜ ì „ìƒíƒœë¥¼ ê°€ì ¸ì˜¤ê³ 
+     System.out.println("ì €ì¥ëœ ì „ ìƒíƒœ: " + originator1.getState()); //ë‚˜íƒ€ë‚¸ë‹¤
      
-     originator2.getT_StateFromMemento(careTaker.getTask(0));  //ÅÂ½ºÅ©ÆäÀÌÁöÀÇ Àü»óÅÂ¸¦ °¡Á®¿À°í
-     System.out.println("ÀúÀåµÈ Àü »óÅÂ: " + originator2.getState()); //³ªÅ¸³½´Ù
-	 }
-	 
-	Main(){
-		 btn1.addActionListener(new EventHandler1());
-		 btn2.addActionListener(new EventHandler2());
-	}
-	
-	
+     originator2.getT_StateFromMemento(careTaker.getTask(0));  //íƒœìŠ¤í¬í˜ì´ì§€ì˜ ì „ìƒíƒœë¥¼ ê°€ì ¸ì˜¤ê³ 
+     System.out.println("ì €ì¥ëœ ì „ ìƒíƒœ: " + originator2.getState()); //ë‚˜íƒ€ë‚¸ë‹¤
+    }
+    
+   Main(){
+       btn1.addActionListener(new EventHandler1());
+       btn2.addActionListener(new EventHandler2());
+   }
+   
+   
 
-	class EventHandler1 implements ActionListener {
-		 
+   class EventHandler1 implements ActionListener {
+       
         @Override
         public void actionPerformed(ActionEvent e) {
             
         }
     
-	}
-	
-	class EventHandler2 implements ActionListener {
-		 
+   }
+   
+   class EventHandler2 implements ActionListener {
+       
         @Override
         public void actionPerformed(ActionEvent e) {
             
         }
     
-	}
+   }
 }
