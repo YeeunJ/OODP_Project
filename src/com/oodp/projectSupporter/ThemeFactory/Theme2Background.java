@@ -6,6 +6,6 @@ public class Theme2Background implements BackgroundTheme{
 	
 	Color bgColor;
 	public Theme2Background(){
-		bgColor = Color.BLUE;
+		bgColor = Color.getHSBColor(173, 87,178);
 	}
 }

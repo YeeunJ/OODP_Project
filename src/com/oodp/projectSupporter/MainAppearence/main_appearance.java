@@ -171,7 +171,7 @@ public class main_appearance {
 		// ###########################<Login Page>###############################
 		
 		ImagePanel Login_Page = new ImagePanel(
-				new ImageIcon("/Users/jeong-yeeun/git/OODP_Project/Image/Login2.jpg").getImage());
+				new ImageIcon("./Image/Login2.jpg").getImage());
 		Login_Page.setBounds(0, 0, 1000, 640);
 		frame.getContentPane().add(Login_Page);
 		frame.setSize(Login_Page.getWidth(), Login_Page.getHeight());
@@ -336,6 +336,16 @@ public class main_appearance {
 		textPane_1.setBackground(Color.LIGHT_GRAY);
 		textPane_1.setBounds(381, 221, 405, 237);
 		taskPage.add(textPane_1);*/
+		
+		JButton taskRedo = new JButton("Redo");
+		taskRedo.setFont(new Font("굴림", Font.BOLD, 20));
+		taskRedo.setBounds(155, 19, 147, 47);
+		taskPage.add(taskRedo);
+		
+		JButton taskUndo = new JButton("Undo");
+		taskUndo.setFont(new Font("굴림", Font.BOLD, 20));
+		taskUndo.setBounds(355, 19, 147, 47);
+		taskPage.add(taskUndo);
 		// ####################################################################
 
 		// ###########################<MyPage>#################################
@@ -443,6 +453,17 @@ public class main_appearance {
 		JLabel textField_11 = new JLabel(mdto.getContent());
 		textField_11.setBounds(700, 365, 175, 21);
 		meetingPage.add(textField_11);
+		
+		JButton meetingRedo = new JButton("Redo");
+		meetingRedo.setFont(new Font("굴림", Font.BOLD, 20));
+		meetingRedo.setBounds(555, 489, 147, 47);
+		meetingPage.add(meetingRedo);
+		
+		JButton meetingUndo = new JButton("Undo");
+		meetingUndo.setFont(new Font("굴림", Font.BOLD, 20));
+		meetingUndo.setBounds(755, 489, 147, 47);
+		meetingPage.add(meetingUndo);
+		
 		// ####################################################################
 
 		// ######################<myPageAddEditPage>######################
@@ -679,7 +700,9 @@ public class main_appearance {
 		meetingPageBackButton.setFont(new Font("굴림", Font.BOLD, 20));
 		meetingPageBackButton.setBounds(155, 489, 147, 47);
 		meetingPage.add(meetingPageBackButton);
-
+		
+		
+		
 		meetingPaticipateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Connect to zoom...");
@@ -932,6 +955,9 @@ public class main_appearance {
 				taskPageButton.setBackground(themeSelection.btnColorReturn());
 				meetingPageButton.setBackground(themeSelection.btnColorReturn());
 				myPageButton.setBackground(themeSelection.btnColorReturn());
+				meetingPage.setBackground(themeSelection.bgColorReturn());
+				taskPage.setBackground(themeSelection.bgColorReturn());
+				myPage.setBackground(themeSelection.bgColorReturn());
 			}
 			
 		});

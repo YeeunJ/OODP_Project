@@ -19,15 +19,15 @@ public class Theme1Factory implements ThemeFactory{
 	@Override
 	public Color bgColorReturn() {
 		// TODO Auto-generated method stub
-		Theme1Button t1btn = new Theme1Button();
-		return t1btn.btnColor;
+		Theme1Background t1bg = new Theme1Background();
+		return t1bg.bgColor;
 	}
 
 	@Override
 	public Color btnColorReturn() {
 		// TODO Auto-generated method stub
-		Theme1Background t1bg = new Theme1Background();
-		return t1bg.bgColor;
+		Theme1Button t1btn = new Theme1Button();
+		return t1btn.btnColor;
 	}
 
 	
