@@ -37,6 +37,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.oodp.projectSupporter.ObserverDP.Meetingchannel;
 import com.oodp.projectSupporter.ThemeFactory.ThemeSelection;
 import com.oodp.projectSupporter.dao.Insertdao;
 import com.oodp.projectSupporter.dao.PrintAlldao;
@@ -50,6 +51,9 @@ import com.oodp.projectSupporter.login.Command;
 import com.oodp.projectSupporter.login.Login;
 import com.oodp.projectSupporter.login.LoginCommand;
 import com.oodp.projectSupporter.login.RegisterCommand;
+import com.oodp.projectSupporter.mementoDP.Caretaker;
+import com.oodp.projectSupporter.mementoDP.M_meetingDTO;
+import com.oodp.projectSupporter.mementoDP.M_taskDTO;
 
 //import com.oodp.projectSupporter.meetingPage.inputFrame;
 
@@ -143,7 +147,7 @@ public class main_appearance {
 		frame.getContentPane().add(mainPage);
 		
 		lblNewLabel_3 = new JLabel("Main Page");
-		lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 31));
+		lblNewLabel_3.setFont(new Font("援대┝", Font.BOLD, 31));
 		lblNewLabel_3.setBounds(133, 55, 213, 73);
 		mainPage.add(lblNewLabel_3);
 
@@ -153,17 +157,17 @@ public class main_appearance {
 		mainPage.add(textPane);
 
 		lblNewLabel_4 = new JLabel("Announcement");
-		lblNewLabel_4.setFont(new Font("굴림", Font.BOLD, 15));
+		lblNewLabel_4.setFont(new Font("援대┝", Font.BOLD, 15));
 		lblNewLabel_4.setBounds(133, 318, 128, 34);
 		mainPage.add(lblNewLabel_4);
 
 		UserWelcomeText = new JLabel("Welcome " + user.getName());
-		UserWelcomeText.setFont(new Font("굴림", Font.PLAIN, 24));
+		UserWelcomeText.setFont(new Font("援대┝", Font.PLAIN, 24));
 		UserWelcomeText.setBounds(133, 151, 264, 73);
 		mainPage.add(UserWelcomeText);
 
 		lblYourProject = new JLabel("Your Project");
-		lblYourProject.setFont(new Font("굴림", Font.BOLD, 15));
+		lblYourProject.setFont(new Font("援대┝", Font.BOLD, 15));
 		lblYourProject.setBounds(409, 173, 128, 34);
 		mainPage.add(lblYourProject);
 		// ######################################################################
@@ -179,7 +183,7 @@ public class main_appearance {
 
 		JLabel lblNewLabel = new JLabel("Log In");
 		lblNewLabel.setBounds(375, 337, 161, 63);
-		lblNewLabel.setFont(new Font("굴림", Font.BOLD, 25));
+		lblNewLabel.setFont(new Font("援대┝", Font.BOLD, 25));
 		Login_Page.add(lblNewLabel);
 
 		IDtext = new JTextField();
@@ -196,12 +200,12 @@ public class main_appearance {
 
 		lblNewLabel_1 = new JLabel("ID   ");
 		lblNewLabel_1.setBounds(317, 406, 50, 15);
-		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 12));
+		lblNewLabel_1.setFont(new Font("援대┝", Font.BOLD, 12));
 		Login_Page.add(lblNewLabel_1);
 
 		lblNewLabel_2 = new JLabel("Password");
 		lblNewLabel_2.setBounds(297, 464, 79, 15);
-		lblNewLabel_2.setFont(new Font("굴림", Font.BOLD, 12));
+		lblNewLabel_2.setFont(new Font("援대┝", Font.BOLD, 12));
 		Login_Page.add(lblNewLabel_2);
 
 		JButton registrationButton = new JButton("Registration");
@@ -223,22 +227,22 @@ public class main_appearance {
 		});
 
 		JLabel lblMail = new JLabel("Mail :");
-		lblMail.setFont(new Font("굴림", Font.BOLD, 20));
+		lblMail.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblMail.setBounds(247, 226, 103, 41);
 		RegistrationPage.add(lblMail);
 		
 		JLabel lblMail1 = new JLabel("Project :");
-		lblMail1.setFont(new Font("굴림", Font.BOLD, 20));
+		lblMail1.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblMail1.setBounds(600, 226, 103, 41);
 		RegistrationPage.add(lblMail1);
 
 		lblPassword_2 = new JLabel("Password :");
-		lblPassword_2.setFont(new Font("굴림", Font.BOLD, 20));
+		lblPassword_2.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblPassword_2.setBounds(193, 317, 136, 41);
 		RegistrationPage.add(lblPassword_2);
 
 		lblNewLabel_16 = new JLabel("Registration Page");
-		lblNewLabel_16.setFont(new Font("굴림", Font.BOLD, 26));
+		lblNewLabel_16.setFont(new Font("援대┝", Font.BOLD, 26));
 		lblNewLabel_16.setBounds(110, 51, 299, 51);
 		RegistrationPage.add(lblNewLabel_16);
 
@@ -262,7 +266,7 @@ public class main_appearance {
 		RegistrationPage.add(textField_19);
 
 		lblTeam = new JLabel("Name :");
-		lblTeam.setFont(new Font("굴림", Font.BOLD, 20));
+		lblTeam.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblTeam.setBounds(228, 407, 136, 41);
 		RegistrationPage.add(lblTeam);
 
@@ -273,7 +277,7 @@ public class main_appearance {
 
 		JButton registrationDoneButton = new JButton("Done");
 
-		registrationDoneButton.setFont(new Font("굴림", Font.BOLD, 15));
+		registrationDoneButton.setFont(new Font("援대┝", Font.BOLD, 15));
 		registrationDoneButton.setBounds(366, 514, 114, 41);
 		RegistrationPage.add(registrationDoneButton);
 
@@ -323,12 +327,12 @@ public class main_appearance {
 		frame.getContentPane().add(taskPage);
 
 		JLabel lblNewLabel_10 = new JLabel("Task Page");
-		lblNewLabel_10.setFont(new Font("굴림", Font.BOLD, 25));
+		lblNewLabel_10.setFont(new Font("援대┝", Font.BOLD, 25));
 		lblNewLabel_10.setBounds(456, 70, 272, 107);
 		taskPage.add(lblNewLabel_10);
 
 		JLabel lblNewLabel_11 = new JLabel("All Tasks :");
-		lblNewLabel_11.setFont(new Font("굴림", Font.BOLD, 20));
+		lblNewLabel_11.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblNewLabel_11.setBounds(127, 236, 163, 47);
 		taskPage.add(lblNewLabel_11);
 		/*
@@ -336,6 +340,7 @@ public class main_appearance {
 		textPane_1.setBackground(Color.LIGHT_GRAY);
 		textPane_1.setBounds(381, 221, 405, 237);
 		taskPage.add(textPane_1);*/
+		
 		// ####################################################################
 
 		// ###########################<MyPage>#################################
@@ -345,7 +350,7 @@ public class main_appearance {
 		
 		
 		lblName = new JLabel("Name :");
-		lblName.setFont(new Font("굴림", Font.BOLD, 20));
+		lblName.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblName.setBounds(569, 197, 97, 56);
 		myPage.add(lblName);
 
@@ -365,7 +370,7 @@ public class main_appearance {
 		textField_2.setColumns(10);
 
 		JLabel lblProject = new JLabel("Project :");
-		lblProject.setFont(new Font("굴림", Font.BOLD, 20));
+		lblProject.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblProject.setBounds(569, 477, 97, 56);
 		myPage.add(lblProject);
 
@@ -375,7 +380,7 @@ public class main_appearance {
 		textField_3.setColumns(10);
 
 		JLabel lblPosition = new JLabel("Position :");
-		lblPosition.setFont(new Font("굴림", Font.BOLD, 20));
+		lblPosition.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblPosition.setBounds(569, 340, 97, 56);
 		myPage.add(lblPosition);
 
@@ -385,7 +390,7 @@ public class main_appearance {
 		myPage.add(textField_4);
 
 		JLabel lblMyTasks = new JLabel("My Tasks :");
-		lblMyTasks.setFont(new Font("굴림", Font.BOLD, 20));
+		lblMyTasks.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblMyTasks.setBounds(56, 197, 134, 56);
 		myPage.add(lblMyTasks);
 
@@ -413,22 +418,22 @@ public class main_appearance {
 		meetingDTO mdto;
 		mdto = (meetingDTO) data2.get(0);
 		JLabel lblNewLabel_8 = new JLabel("Meeting Page");
-		lblNewLabel_8.setFont(new Font("굴림", Font.BOLD, 30));
+		lblNewLabel_8.setFont(new Font("援대┝", Font.BOLD, 30));
 		lblNewLabel_8.setBounds(433, 57, 244, 100);
 		meetingPage.add(lblNewLabel_8);
 
 		JLabel lblNewLabel_9 = new JLabel("Date :");
-		lblNewLabel_9.setFont(new Font("굴림", Font.BOLD, 18));
+		lblNewLabel_9.setFont(new Font("援대┝", Font.BOLD, 18));
 		lblNewLabel_9.setBounds(550, 248, 115, 25);
 		meetingPage.add(lblNewLabel_9);
 
 		JLabel lblTitle = new JLabel("Location :");
-		lblTitle.setFont(new Font("굴림", Font.BOLD, 18));
+		lblTitle.setFont(new Font("援대┝", Font.BOLD, 18));
 		lblTitle.setBounds(550, 306, 103, 25);
 		meetingPage.add(lblTitle);
 
 		JLabel lblContent = new JLabel("Content :");
-		lblContent.setFont(new Font("굴림", Font.BOLD, 18));
+		lblContent.setFont(new Font("援대┝", Font.BOLD, 18));
 		lblContent.setBounds(550, 362, 103, 25);
 		meetingPage.add(lblContent);
 
@@ -443,6 +448,7 @@ public class main_appearance {
 		JLabel textField_11 = new JLabel(mdto.getContent());
 		textField_11.setBounds(700, 365, 175, 21);
 		meetingPage.add(textField_11);
+		
 		// ####################################################################
 
 		// ######################<myPageAddEditPage>######################
@@ -451,27 +457,27 @@ public class main_appearance {
 		frame.getContentPane().add(myPageAddEditPage);
 
 		JLabel lblNewLabel_7 = new JLabel("Enter New Informations");
-		lblNewLabel_7.setFont(new Font("굴림", Font.BOLD, 20));
+		lblNewLabel_7.setFont(new Font("援대┝", Font.BOLD, 20));
 		lblNewLabel_7.setBounds(67, 97, 339, 82);
 		myPageAddEditPage.add(lblNewLabel_7);
 
 		JLabel lblId = new JLabel("ID :");
-		lblId.setFont(new Font("굴림", Font.BOLD, 17));
+		lblId.setFont(new Font("援대┝", Font.BOLD, 17));
 		lblId.setBounds(124, 225, 97, 56);
 		myPageAddEditPage.add(lblId);
 
 		JLabel lblPassword_1 = new JLabel("Password :");
-		lblPassword_1.setFont(new Font("굴림", Font.BOLD, 17));
+		lblPassword_1.setFont(new Font("援대┝", Font.BOLD, 17));
 		lblPassword_1.setBounds(67, 301, 97, 56);
 		myPageAddEditPage.add(lblPassword_1);
 
 		JLabel lblName_1 = new JLabel("Name :");
-		lblName_1.setFont(new Font("굴림", Font.BOLD, 17));
+		lblName_1.setFont(new Font("援대┝", Font.BOLD, 17));
 		lblName_1.setBounds(98, 377, 97, 56);
 		myPageAddEditPage.add(lblName_1);
 
 		JLabel lblProject_1 = new JLabel("Project :");
-		lblProject_1.setFont(new Font("굴림", Font.BOLD, 17));
+		lblProject_1.setFont(new Font("援대┝", Font.BOLD, 17));
 		lblProject_1.setBounds(371, 225, 97, 56);
 		myPageAddEditPage.add(lblProject_1);
 
@@ -502,7 +508,7 @@ public class main_appearance {
 		frame.getContentPane().add(taskAddEditPage);
 
 		JLabel lblNewLabel_12 = new JLabel("Manager :");
-		lblNewLabel_12.setFont(new Font("굴림", Font.BOLD, 15));
+		lblNewLabel_12.setFont(new Font("援대┝", Font.BOLD, 15));
 		lblNewLabel_12.setBounds(257, 136, 146, 71);
 		taskAddEditPage.add(lblNewLabel_12);
 
@@ -512,17 +518,17 @@ public class main_appearance {
 		textField_12.setColumns(10);
 
 		JLabel lblDueDate = new JLabel("Due date :");
-		lblDueDate.setFont(new Font("굴림", Font.BOLD, 15));
+		lblDueDate.setFont(new Font("援대┝", Font.BOLD, 15));
 		lblDueDate.setBounds(257, 249, 146, 71);
 		taskAddEditPage.add(lblDueDate);
 
 		JLabel lblTitle_1 = new JLabel("Task Title :");
-		lblTitle_1.setFont(new Font("굴림", Font.BOLD, 15));
+		lblTitle_1.setFont(new Font("援대┝", Font.BOLD, 15));
 		lblTitle_1.setBounds(257, 354, 146, 71);
 		taskAddEditPage.add(lblTitle_1);
 
 		JLabel lblContents = new JLabel("Contents :");
-		lblContents.setFont(new Font("굴림", Font.BOLD, 15));
+		lblContents.setFont(new Font("援대┝", Font.BOLD, 15));
 		lblContents.setBounds(257, 464, 146, 71);
 		taskAddEditPage.add(lblContents);
 
@@ -542,7 +548,7 @@ public class main_appearance {
 		taskAddEditPage.add(textField_15);
 
 		JLabel lblNewLabel_14 = new JLabel("Task Add & Edit Page");
-		lblNewLabel_14.setFont(new Font("굴림", Font.BOLD, 25));
+		lblNewLabel_14.setFont(new Font("援대┝", Font.BOLD, 25));
 		lblNewLabel_14.setBounds(355, 77, 358, 56);
 		taskAddEditPage.add(lblNewLabel_14);
 		// ####################################################################
@@ -555,7 +561,7 @@ public class main_appearance {
 		taskCheckListPage.setLayout(null);
 
 		taskCheckListPageBackButton = new JButton("Back");
-		taskCheckListPageBackButton.setFont(new Font("굴림", Font.BOLD, 15));
+		taskCheckListPageBackButton.setFont(new Font("援대┝", Font.BOLD, 15));
 		taskCheckListPageBackButton.setBounds(145, 470, 166, 81);
 		taskCheckListPage.add(taskCheckListPageBackButton);
 		// ####################################################################
@@ -571,7 +577,7 @@ public class main_appearance {
 		taskDetailPage.add(textPane_2);
 
 		JLabel lblNewLabel_13 = new JLabel("Task Details");
-		lblNewLabel_13.setFont(new Font("굴림", Font.BOLD, 17));
+		lblNewLabel_13.setFont(new Font("援대┝", Font.BOLD, 17));
 		lblNewLabel_13.setBounds(179, 41, 342, 48);
 		taskDetailPage.add(lblNewLabel_13);
 		// ####################################################################
@@ -596,6 +602,8 @@ public class main_appearance {
 				user.setPassword(String.valueOf(passwordField.getPassword()));
 				LoginCommand login = new LoginCommand(user);
 				loginButton.setCommand(login);
+	/////@@@@@@
+				Meetingchannel mc =new Meetingchannel();
 				try {
 					result = loginButton.pressed();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -608,6 +616,9 @@ public class main_appearance {
 					System.out.println(user.toString());
 					Login_Page.setVisible(false);
 					mainPage.setVisible(true);
+	///@@@@@@@@@@@
+					mc.meetingTimeOn();
+					
 				}else {
 					JOptionPane.showMessageDialog(null, "You failed to log in");
 				}
@@ -661,25 +672,47 @@ public class main_appearance {
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<MeetingPage>@@@@@@@@@@@@@@@@@@@@@@@@
 		meetingPaticipateButton = new JButton("Meeting Participate");
-		meetingPaticipateButton.setFont(new Font("굴림", Font.BOLD, 15));
+		meetingPaticipateButton.setFont(new Font("援대┝", Font.BOLD, 15));
 		meetingPaticipateButton.setBounds(168, 238, 237, 35);
 		meetingPage.add(meetingPaticipateButton);
 		
 		listMeetingButton = new JButton("past meeting list");
-		listMeetingButton.setFont(new Font("굴림", Font.BOLD, 15));
+		listMeetingButton.setFont(new Font("援대┝", Font.BOLD, 15));
 		listMeetingButton.setBounds(168, 295, 237, 35);
 		meetingPage.add(listMeetingButton);
 		
 		addNewMeetingButton = new JButton("Add new meeting");
-		addNewMeetingButton.setFont(new Font("굴림", Font.BOLD, 15));
+		addNewMeetingButton.setFont(new Font("援대┝", Font.BOLD, 15));
 		addNewMeetingButton.setBounds(168, 352, 237, 35);
 		meetingPage.add(addNewMeetingButton);
 
 		meetingPageBackButton = new JButton("Back");
-		meetingPageBackButton.setFont(new Font("굴림", Font.BOLD, 20));
+		meetingPageBackButton.setFont(new Font("援대┝", Font.BOLD, 20));
 		meetingPageBackButton.setBounds(155, 489, 147, 47);
 		meetingPage.add(meetingPageBackButton);
-
+//@@@@@@@@@@@@@@@@@@@@@@@
+		M_meetingDTO originator1 = new M_meetingDTO();
+		M_taskDTO originator2 = new M_taskDTO();
+	    Caretaker careTaker = new Caretaker();  
+	    
+		JButton meetingRedo = new JButton("Redo");
+		meetingRedo.setFont(new Font("굴림", Font.BOLD, 20));
+		meetingRedo.setBounds(555, 489, 147, 47);
+		meetingPage.add(meetingRedo);
+		
+		JButton meetingUndo = new JButton("Undo");
+		meetingUndo.setFont(new Font("굴림", Font.BOLD, 20));
+		meetingUndo.setBounds(755, 489, 147, 47);
+		meetingPage.add(meetingUndo);
+		
+		meetingUndo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				originator2.getT_StateFromMemento(careTaker.getTask(0)); //페이지의 전상태를 가져오고
+				originator2.getState(); //라벨에 set해서 나타낸다
+			}
+		});
+//@@@@@@@@@@@@@@@@@@@
+		
 		meetingPaticipateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Connect to zoom...");
@@ -694,7 +727,7 @@ public class main_appearance {
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<taskAddEditPage>@@@@@@@@@@@@@@@@@@@@@@@@@
 		JButton btnNewButton_2 = new JButton("Add");
-		btnNewButton_2.setFont(new Font("굴림", Font.BOLD, 16));
+		btnNewButton_2.setFont(new Font("援대┝", Font.BOLD, 16));
 		btnNewButton_2.setBounds(521, 562, 117, 56);
 		taskAddEditPage.add(btnNewButton_2);
 
@@ -702,24 +735,24 @@ public class main_appearance {
 		
 		JButton btnNewButton = new JButton("Member Authority Edit");
 		
-		btnNewButton.setFont(new Font("굴림", Font.BOLD, 20));
+		btnNewButton.setFont(new Font("援대┝", Font.BOLD, 20));
 		btnNewButton.setBounds(352, 385, 314, 39);
 		myPageAddEditPage.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Save");
-		btnNewButton_1.setFont(new Font("굴림", Font.BOLD, 20));
+		btnNewButton_1.setFont(new Font("援대┝", Font.BOLD, 20));
 		btnNewButton_1.setBounds(197, 514, 209, 56);
 		myPageAddEditPage.add(btnNewButton_1);
 
 		JButton addEditGoBack = new JButton("Go Back");
-		addEditGoBack.setFont(new Font("굴림", Font.BOLD, 16));
+		addEditGoBack.setFont(new Font("援대┝", Font.BOLD, 16));
 		addEditGoBack.setBounds(67, 46, 113, 41);
 		myPageAddEditPage.add(addEditGoBack);
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<TaskPage>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		JButton taskPageBackButton;
 		taskPageBackButton = new JButton("Back");
-		taskPageBackButton.setFont(new Font("굴림", Font.BOLD, 16));
+		taskPageBackButton.setFont(new Font("援대┝", Font.BOLD, 16));
 		taskPageBackButton.setBounds(110, 435, 108, 37);
 		taskPage.add(taskPageBackButton);
 		taskPageBackButton.addActionListener(new ActionListener() {
@@ -730,7 +763,7 @@ public class main_appearance {
 		});
 
 		JButton taskChecklistButton = new JButton("Task CheckList");
-		taskChecklistButton.setFont(new Font("굴림", Font.BOLD, 20));
+		taskChecklistButton.setFont(new Font("援대┝", Font.BOLD, 20));
 		taskChecklistButton.setBounds(456, 526, 233, 71);
 		taskPage.add(taskChecklistButton);
 		taskChecklistButton.addActionListener(new ActionListener() {
@@ -739,6 +772,24 @@ public class main_appearance {
 				taskCheckListPage.setVisible(true);
 			}
 		});
+//@@@@@@@@@@@@@@		
+		JButton taskRedo = new JButton("Redo");
+		taskRedo.setFont(new Font("굴림", Font.BOLD, 20));
+		taskRedo.setBounds(155, 19, 147, 47);
+		taskPage.add(taskRedo);
+		
+		JButton taskUndo = new JButton("Undo");
+		taskUndo.setFont(new Font("굴림", Font.BOLD, 20));
+		taskUndo.setBounds(355, 19, 147, 47);
+		taskPage.add(taskUndo);
+
+		taskUndo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				originator1.getM_StateFromMemento(careTaker.getMeeting(0)); //페이지의 전상태를 가져오고
+				originator1.getState(); //라벨에 set해서 나타낸다
+			}
+		});
+//@@@@@@@@@@@@@@
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<MainPage>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		JButton taskPageButton = new JButton("Task Page");
@@ -819,7 +870,7 @@ public class main_appearance {
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<MyPage>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		JButton myPageGoBackButton = new JButton("Go back");
-		myPageGoBackButton.setFont(new Font("굴림", Font.BOLD, 20));
+		myPageGoBackButton.setFont(new Font("援대┝", Font.BOLD, 20));
 		myPageGoBackButton.setBounds(176, 579, 147, 33);
 		myPage.add(myPageGoBackButton);
 
@@ -833,7 +884,7 @@ public class main_appearance {
 		});
 
 		JButton myPageAddEditButton = new JButton("Add & Edit");
-		myPageAddEditButton.setFont(new Font("굴림", Font.BOLD, 20));
+		myPageAddEditButton.setFont(new Font("援대┝", Font.BOLD, 20));
 		myPageAddEditButton.setBounds(428, 543, 183, 69);
 		myPage.add(myPageAddEditButton);
 		myPageAddEditButton.addActionListener(new ActionListener() {
@@ -867,7 +918,7 @@ public class main_appearance {
 		});
 
 		JButton taskAddEditPageBackButton = new JButton("Back");
-		taskAddEditPageBackButton.setFont(new Font("굴림", Font.BOLD, 16));
+		taskAddEditPageBackButton.setFont(new Font("援대┝", Font.BOLD, 16));
 		taskAddEditPageBackButton.setBounds(41, 562, 117, 56);
 		taskAddEditPage.add(taskAddEditPageBackButton);
 		taskAddEditPageBackButton.addActionListener(new ActionListener() {
@@ -879,7 +930,7 @@ public class main_appearance {
 
 		
 		
-		taskAddEditButton.setFont(new Font("굴림", Font.BOLD, 20));
+		taskAddEditButton.setFont(new Font("援대┝", Font.BOLD, 20));
 		taskAddEditButton.setBounds(740, 526, 233, 71);
 		taskPage.add(taskAddEditButton);
 		taskAddEditButton.addActionListener(new ActionListener() {
@@ -890,7 +941,7 @@ public class main_appearance {
 		});
 
 		JButton taskDetailButton = new JButton("Task Details");
-		taskDetailButton.setFont(new Font("굴림", Font.BOLD, 20));
+		taskDetailButton.setFont(new Font("援대┝", Font.BOLD, 20));
 		taskDetailButton.setBounds(157, 526, 233, 71);
 		taskPage.add(taskDetailButton);
 		taskDetailButton.addActionListener(new ActionListener() {
@@ -908,7 +959,7 @@ public class main_appearance {
 				taskPage.setVisible(true);
 			}
 		});
-		taskDetailPageBackButton.setFont(new Font("굴림", Font.BOLD, 15));
+		taskDetailPageBackButton.setFont(new Font("援대┝", Font.BOLD, 15));
 		taskDetailPageBackButton.setBounds(179, 548, 124, 36);
 		taskDetailPage.add(taskDetailPageBackButton);
 
