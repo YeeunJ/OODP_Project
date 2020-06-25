@@ -867,7 +867,25 @@ public class main_appearance {
 				myPageAddEditPage.setVisible(true);
 			}
 		});
+		
+		PageMaster SubTaskPageMaster = new PageMaster(new taskPageMaker());
+		JPanel SubTaskPage = SubTaskPageMaster.createPage();
+		frame.getContentPane().add(SubTaskPage);
+		
+		JButton SubTask = new JButton("Sub Task");
+		SubTask.setFont(new Font("굴림", Font.BOLD, 20));
+		SubTask.setBounds(728, 543, 183, 69);
+		myPage.add(SubTask);
+		SubTask.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
 		addEditGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myPage.setVisible(true);
@@ -961,6 +979,8 @@ public class main_appearance {
 			}
 			
 		});
+		
+		
 		// ###################################################################
 		// ###################################################################
 		// ###################################################################
