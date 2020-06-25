@@ -2,34 +2,22 @@ package com.oodp.projectSupporter.mementoDP;
 
 import java.util.ArrayList;
 
+import com.oodp.projectSupporter.dto.DTO;
+
 public class Memento {
      
-      private String date;
-	  private String location;
-	  private String content;
+      private ArrayList<DTO> data = new ArrayList<DTO>();
+      private String check;
+      private String state;
 	  
-	  private String project_id;
-	  private String member_id;
-	  private String title;
-	  private String due_date;
-	  private String check;
-	  
-	  private ArrayList<String> arrList1 = new ArrayList<String>();  //¹ÌÆÃ
-	  private ArrayList<String> arrList2 = new ArrayList<String>();  //Å×½ºÅ©
+	  private ArrayList<String> arrList1 = new ArrayList<String>();  //ï¿½ï¿½ï¿½ï¿½
+	  private ArrayList<String> arrList2 = new ArrayList<String>();  //ï¿½×½ï¿½Å©
 	  
 	  
-	   Memento(String d,String l, String c) {
-	        date = d;
-	        location= l;
-	        content= c;
-	    }
-	  
-	   Memento(String p,String m, String t, String d, String c) {
-	    	project_id=p;
-	  		member_id=m;
-	  		title=t;
-	  		due_date=d;	
-	  		check=c;  
+	   Memento(ArrayList<DTO> data, String check, String state) {
+	        this.data = data;
+	        this.check = check; // "meetingPage", "taskPage"
+	        this.state = state; // "undo" -> delete, "redo" -> insert
 	    }
 	  
 	  public void setMeetingpage(String p,String m, String t, String d, String c) {
