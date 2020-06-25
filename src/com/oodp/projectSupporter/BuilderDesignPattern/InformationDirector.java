@@ -6,13 +6,12 @@ public class InformationDirector {
 	public void setInformationBuilder(InformationBuilder IB) {
 		informtionBuilder = IB;
 	}
-	public InformationBuilder getInformationBuilder(InformationBuilder IB) {
+	public InformationBuilder getInformationBuilder() {
 		return informtionBuilder;
 	}
 	public void constructInformationTank() {
 		informtionBuilder.createNewInformationTank();
-		informtionBuilder.buildMail();
-		informtionBuilder.buildName();
-		informtionBuilder.buildProject();
+		informtionBuilder.buildTaskDAO();
+		informtionBuilder.buildlMeetingDAO();
 	}
 }

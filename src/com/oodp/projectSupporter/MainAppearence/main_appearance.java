@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -34,9 +35,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.oodp.projectSupporter.BuilderDesignPattern.InformationDirector;
+import com.oodp.projectSupporter.BuilderDesignPattern.MeetingPageInformation;
+import com.oodp.projectSupporter.BuilderDesignPattern.TaskPageInformation;
+import com.oodp.projectSupporter.CompositePattern.SubTaskDirectory;
+import com.oodp.projectSupporter.CompositePattern.SubTaskFile;
 import com.oodp.projectSupporter.ThemeFactory.ThemeSelection;
 import com.oodp.projectSupporter.dao.Insertdao;
 import com.oodp.projectSupporter.dao.PrintAlldao;
@@ -53,7 +60,7 @@ import com.oodp.projectSupporter.login.RegisterCommand;
 
 //import com.oodp.projectSupporter.meetingPage.inputFrame;
 
-public class main_appearance {
+public class main_appearance extends JFrame{
 	dao d = new dao();
 	//ArrayList<String> mailList = new ArrayList<>();
 	//ArrayList<String> passwordList = new ArrayList<>();
@@ -411,6 +418,7 @@ public class main_appearance {
 		PageMaster meetingPageMaster = new PageMaster(new meetingPageMaker());
 		JPanel meetingPage = meetingPageMaster.createPage();
 		frame.getContentPane().add(meetingPage);
+		
 		PrintAlldao pa = new PrintAlldao("meetingPage");
 		d.changedao(pa);
 		try {
@@ -419,7 +427,17 @@ public class main_appearance {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		ArrayList<DTO> data2 = pa.getdata();
+		
+		MeetingPageInformation meetingPageInformation = new MeetingPageInformation();
+		InformationDirector informationDirector1 = new InformationDirector();
+		informationDirector1.setInformationBuilder(meetingPageInformation);
+		//pa.getdata();
+		//informationDirector.getInformationBuilder().buildlMeetingDAO().getdata();
+		
+		
+		ArrayList<DTO> data2 = informationDirector1.getInformationBuilder().buildlMeetingDAO().getdata();
+		
+		
 		meetingDTO mdto;
 		mdto = (meetingDTO) data2.get(0);
 		JLabel lblNewLabel_8 = new JLabel("Meeting Page");
@@ -775,15 +793,21 @@ public class main_appearance {
 				taskAddEditButton.setVisible(managerCheckClass.checkResult());
 				
 				mainPage.setVisible(false);
-				PrintAlldao pa = new PrintAlldao("taskPage");
+				
+				TaskPageInformation  taskPageInformation = new TaskPageInformation();
+				InformationDirector informationDirector = new InformationDirector();
+				informationDirector.setInformationBuilder(taskPageInformation);
+				
+				/*PrintAlldao pa = new PrintAlldao("taskPage");
 				d.changedao(pa);
 				try {
 					d.prepareDB();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
-				ArrayList<DTO> data2 = pa.getdata();
+				}*/
+				//pa.getdata();
+				ArrayList<DTO> data2 = informationDirector.getInformationBuilder().buildTaskDAO().getdata();
 				taskGroup = new ButtonGroup();
 				JRadioButton[] task = new JRadioButton[9];
 				int height = 150;
@@ -872,6 +896,8 @@ public class main_appearance {
 		JPanel SubTaskPage = SubTaskPageMaster.createPage();
 		frame.getContentPane().add(SubTaskPage);
 		
+		SubTaskDialog dialog = new SubTaskDialog(this,"Sub Tasks");
+		
 		JButton SubTask = new JButton("Sub Task");
 		SubTask.setFont(new Font("굴림", Font.BOLD, 20));
 		SubTask.setBounds(728, 543, 183, 69);
@@ -881,7 +907,7 @@ public class main_appearance {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				dialog.setVisible(true);
 			}
 			
 		});
@@ -1087,10 +1113,99 @@ class inputFrame extends JDialog {
 				System.out.println(md.toString());
 			}
 		});
-
+		
 		this.setSize(400, 400);
 		this.setModal(true);
 		this.setVisible(true);
 
+	}
+}
+
+class SubTaskDialog extends JDialog{
+	JButton okButton = new JButton("OK");
+	JButton dirAddButton = new JButton("Add Dir");
+	JButton fileAddButton = new JButton("Add File");
+	JButton printButton = new JButton("Print");
+	JButton dirChangeButton = new JButton("Directory change");
+	JButton parentDirButton = new JButton("Back to parent");
+	
+	JTextArea text = new JTextArea(20,30);
+	JTextField input = new JTextField(20);
+	SubTaskDirectory directory = new SubTaskDirectory("parent");
+	SubTaskDirectory temp = directory;
+	public SubTaskDialog(JFrame frame, String title) {
+		super(frame, title);
+		setLayout(new FlowLayout());
+		setSize(500,500);
+		add(text);
+		add(input);
+		add(dirAddButton);
+		add(fileAddButton);
+		add(printButton);
+		add(dirChangeButton);
+		add(parentDirButton);
+		add(okButton);
+		setLocationRelativeTo(null);
+		
+		fileAddButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				SubTaskFile a = new SubTaskFile(input.getText());
+				directory.add(a);
+				input.setText("");
+			}
+			
+		});
+		dirAddButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				SubTaskDirectory a = new SubTaskDirectory("["+input.getText()+"]");
+				directory.add(a);
+				input.setText("");
+			}
+			
+		});
+		printButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				text.setText("");
+				directory.print(text);
+			}
+			
+		});
+		dirChangeButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				directory = (SubTaskDirectory) directory.changeDirectroy(input.getText(),directory);
+			}
+			
+		});
+		parentDirButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				directory = temp;
+			}
+			
+		});
+		okButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false);
+				text.setText("");
+				input.setText("");
+			}
+			
+		});
 	}
 }
