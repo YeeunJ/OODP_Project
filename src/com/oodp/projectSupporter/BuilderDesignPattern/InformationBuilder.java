@@ -1,6 +1,8 @@
 package com.oodp.projectSupporter.BuilderDesignPattern;
 
-abstract class InformationBuilder {
+import com.oodp.projectSupporter.dao.PrintAlldao;
+
+public abstract class InformationBuilder {
 	protected InformationTank informationTank;
 	
 	public InformationTank getInformationTank() {
@@ -11,7 +13,6 @@ abstract class InformationBuilder {
 		informationTank=new InformationTank();
 	}
 	
-	public abstract void buildName();
-	public abstract void buildMail();
-	public abstract void buildProject();
+	public abstract PrintAlldao buildTaskDAO();
+	public abstract PrintAlldao buildlMeetingDAO();
 }
