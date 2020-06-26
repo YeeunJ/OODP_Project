@@ -731,7 +731,7 @@ public class main {
 				td.setMember_id(user.getUser_id());
 				td.setProject_id(Integer.parseInt(textField_12.getText()));
 				td.setTitle(textField_13.getText());
-				td.setContent(textField_14.getText());
+				td.setContent(textField_1.getText());
 				
 				Insertdao pa = new Insertdao("taskPage", md);
 				d.changedao(pa);

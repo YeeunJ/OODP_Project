@@ -6,7 +6,7 @@ public class MangerCheckClass {
 	public ManagerState managerState;
 	
 	public MangerCheckClass(int check){
-		if(check != 0) {
+		if(check % 2 == 1) {
 			ManagerCheckClasses managerCheckClasses = new ManagerCheckClasses();
 			this.managerState=managerCheckClasses;
 		}else {

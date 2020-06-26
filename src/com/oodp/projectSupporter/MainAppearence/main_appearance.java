@@ -44,6 +44,7 @@ import com.oodp.projectSupporter.dao.dao;
 import com.oodp.projectSupporter.dbconnection.connection;
 import com.oodp.projectSupporter.dto.DTO;
 import com.oodp.projectSupporter.dto.meetingDTO;
+import com.oodp.projectSupporter.dto.taskDTO;
 import com.oodp.projectSupporter.dto.userDTO;
 import com.oodp.projectSupporter.login.Button;
 import com.oodp.projectSupporter.login.Command;
@@ -164,7 +165,7 @@ public class main_appearance {
 
 		lblYourProject = new JLabel("Your Project");
 		lblYourProject.setFont(new Font("굴림", Font.BOLD, 15));
-		lblYourProject.setBounds(409, 173, 128, 34);
+		lblYourProject.setBounds(409, 173, 300, 34);
 		mainPage.add(lblYourProject);
 		// ######################################################################
 
@@ -605,6 +606,15 @@ public class main_appearance {
 				if(result) {
 					user = loginButton.getData();
 					UserWelcomeText.setText("Welcome " + user.getName());
+					PrintAlldao pad = new PrintAlldao("project", user.getProject_id());
+					d.changedao(pad);
+					try {
+						d.prepareDB();
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					lblYourProject.setText("Your Project " + pad.getproject());
 					System.out.println(user.toString());
 					Login_Page.setVisible(false);
 					mainPage.setVisible(true);
@@ -697,7 +707,29 @@ public class main_appearance {
 		btnNewButton_2.setFont(new Font("굴림", Font.BOLD, 16));
 		btnNewButton_2.setBounds(521, 562, 117, 56);
 		taskAddEditPage.add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				taskDTO td = new taskDTO();
+				td.setMember_id(user.getUser_id());
+				td.setProject_id(Integer.parseInt(textField_12.getText()));
+				td.setTitle(textField_13.getText());
+				td.setContent(textField_14.getText());
+				
+				Insertdao pa = new Insertdao("taskPage", md);
+				d.changedao(pa);
+				try {
+					d.prepareDB();
+					JOptionPane.showMessageDialog(null, "Data saving complete.");
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Data saving fail. Try again!");
+				}
+				
+			}
+			
+		});
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@<myPageAddEditPage>@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		JButton btnNewButton = new JButton("Member Authority Edit");
@@ -762,12 +794,20 @@ public class main_appearance {
 				}
 				ArrayList<DTO> data2 = pa.getdata();
 				taskGroup = new ButtonGroup();
+				taskDTO td = (taskDTO)data2.get(2);
+				textPane_2.setText(td.getContent());
 				JRadioButton[] task = new JRadioButton[9];
 				int height = 150;
 				int i = 0;
 				for(DTO d: data2) {
 					task[i] = new JRadioButton(d.toString());
 					task[i].setBounds(250, height, 700, 36);
+					task[i].addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							taskDTO td = (taskDTO)data2.get((int)Math.random()%8);
+							textPane_2.setText(td.getContent());
+						}
+					});
 					height+=40;
 					if(i < 8)
 						taskPage.add(task[i]);
@@ -972,7 +1012,7 @@ class ImagePanel extends JPanel {
 
 class inputFrame extends JDialog {
 	JPanel panel = new JPanel();
-	dao d = new dao();
+	dao dr = new dao();
 	public inputFrame() {
 		getContentPane().add(panel);
 
@@ -1016,7 +1056,7 @@ class inputFrame extends JDialog {
 
 		pbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent T) {
-				DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
+				DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				meetingDTO md = new meetingDTO();
 				md.setProject_id(Integer.parseInt(project_id.getText()));
 				try {
@@ -1028,10 +1068,10 @@ class inputFrame extends JDialog {
 				md.setContent(content.getText());
 				md.setLocation(location.getText());
 				
-				Insertdao pa = new Insertdao("taskPage", md);
-				d.changedao(pa);
+				Insertdao pa = new Insertdao("meetingPage", md);
+				dr.changedao(pa);
 				try {
-					d.prepareDB();
+					dr.prepareDB();
 					JOptionPane.showMessageDialog(null, "Data saving complete.");
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
@@ -1039,6 +1079,7 @@ class inputFrame extends JDialog {
 				}
 				
 				System.out.println(md.toString());
+				setVisible(false);
 			}
 		});
 
